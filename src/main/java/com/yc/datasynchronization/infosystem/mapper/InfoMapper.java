@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface InfoMapper {
-    @Select("select id, box_number as name  from box_state")
+    @Select("select USERNAME as name  from SYS_USER")
     List<UserInfo> getInfoUser();
 }
