@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 /**
- * 实战平台数据库配置配置
+ * 信息平台数据库配置配置
  */
 @Configuration//注册到springboot容器
 @MapperScan(basePackages= {"com.yc.datasynchronization.infosystem.mapper"},sqlSessionFactoryRef="infoSqlSessionFactory")

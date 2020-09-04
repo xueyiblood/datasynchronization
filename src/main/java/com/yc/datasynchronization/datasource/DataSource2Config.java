@@ -18,6 +18,10 @@ import javax.sql.DataSource;
  * @Primary:意思是在众多相同的bean中，优先使用用@Primary注解的bean
  * @Qualifire:让Spring可以按照Bean名称进入注入@Autowired
  */
+
+/**
+ * 一所数据库配置
+ */
 @Configuration//注册到springboot容器
 @MapperScan(basePackages= {"com.yc.datasynchronization.detentionhouse.mapper"},sqlSessionFactoryRef="detentionSqlSessionFactory")
 public class DataSource2Config {
