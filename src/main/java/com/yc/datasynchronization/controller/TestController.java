@@ -1,17 +1,13 @@
 package com.yc.datasynchronization.controller;
 
-import com.yc.datasynchronization.detentionhouse.mapper.DetentionMapper;
-import com.yc.datasynchronization.detentionhouse.service.DetentionService;
-import com.yc.datasynchronization.infosystem.entity.UserInfo;
+import com.yc.datasynchronization.detentionhouse1.mapper.DetentionMapper;
+import com.yc.datasynchronization.detentionhouse1.service.DetentionService;
 import com.yc.datasynchronization.infosystem.mapper.InfoMapper;
 import com.yc.datasynchronization.infosystem.service.InfoService;
 import com.yc.datasynchronization.infosystem.service.impl.InfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("test")
@@ -30,15 +26,4 @@ public class TestController {
     @Autowired
     private DetentionMapper detentionMapper;
 
-    @GetMapping("/getInfoUser")
-    public Integer getInfoUser() {
-        List<UserInfo> infoUser1 = infoService.getInfoUser();
-        return 1;
-    }
-
-
-    @GetMapping("/getDetentionUser")
-    public Integer getDetentionUser() {
-        return detentionService.getDetentionUser();
-    }
 }
