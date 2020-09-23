@@ -1,9 +1,6 @@
 package com.yc.datasynchronization.actual.service.impl;
 
-import com.yc.datasynchronization.actual.entity.LshjxxbKss;
-import com.yc.datasynchronization.actual.entity.RybdxxbKss;
-import com.yc.datasynchronization.actual.entity.RyjbxxbKss;
-import com.yc.datasynchronization.actual.entity.ZpbKss;
+import com.yc.datasynchronization.actual.entity.*;
 import com.yc.datasynchronization.actual.mapper.ActualMapper;
 import com.yc.datasynchronization.actual.service.ActualService;
 import com.yc.datasynchronization.infosystem.entity.Zpb;
@@ -106,7 +103,43 @@ public class ActualServiceImpl implements ActualService {
     }
 
     @Override
+    @Transactional(transactionManager = "actualTransactionManager")
     public int upaActualRybdxxRsrq(String rybh, Date rsrq) {
         return actualMapper.upaActualRybdxxRsrq(rybh,rsrq);
+    }
+
+    @Override
+    @Transactional(transactionManager = "actualTransactionManager")
+    public List<YljlbKss> getActualSnyl(YljlbKss yljlbKss) {
+        return actualMapper.getActualSnyl(yljlbKss);
+    }
+
+    @Override
+    public int insActualSnyl(YljlbKss yljlbKss) {
+        return actualMapper.insActualSnyl(yljlbKss);
+    }
+
+    @Override
+    @Transactional(transactionManager = "actualTransactionManager")
+    public List<TjcsdjKss> getActualTy(TjcsdjKss tjcsdjKss) {
+        return actualMapper.getActualTy(tjcsdjKss);
+    }
+
+    @Override
+    @Transactional(transactionManager = "actualTransactionManager")
+    public int insActualTy(TjcsdjKss tjcsdjKss) {
+        return actualMapper.insActualTy(tjcsdjKss);
+    }
+
+    @Override
+    @Transactional(transactionManager = "actualTransactionManager")
+    public List<TxxxbKss> getActualTx(TxxxbKss txxxbKss) {
+        return actualMapper.getActualTx(txxxbKss);
+    }
+
+    @Override
+    @Transactional(transactionManager = "actualTransactionManager")
+    public int insActualTx(TxxxbKss txxxbKss) {
+        return actualMapper.insActualTx(txxxbKss);
     }
 }

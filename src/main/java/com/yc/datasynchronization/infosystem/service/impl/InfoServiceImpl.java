@@ -1,9 +1,6 @@
 package com.yc.datasynchronization.infosystem.service.impl;
 
-import com.yc.datasynchronization.infosystem.entity.Lshjxx;
-import com.yc.datasynchronization.infosystem.entity.Rybdxx;
-import com.yc.datasynchronization.infosystem.entity.Ryjbxx;
-import com.yc.datasynchronization.infosystem.entity.Zpb;
+import com.yc.datasynchronization.infosystem.entity.*;
 import com.yc.datasynchronization.infosystem.mapper.InfoMapper;
 import com.yc.datasynchronization.infosystem.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +57,24 @@ public class InfoServiceImpl implements InfoService {
     @Transactional(transactionManager = "infoTransactionManager")
     public List<Rybdxx> getInfoRsrq(String jsbh) {
         return infoMapper.getInfoRsrq(jsbh);
+    }
+
+    @Override
+    @Transactional(transactionManager = "infoTransactionManager")
+    public List<Yljlb> getInfoYljib(String jsbh, String yl) {
+        return infoMapper.getInfoYljib(jsbh,yl);
+    }
+
+    @Override
+    @Transactional(transactionManager = "infoTransactionManager")
+    public List<Tjcsdj> getInfoTjcsdj(String jsbh, String ty) {
+        return infoMapper.getInfoTjcsdj(jsbh, ty);
+    }
+
+    @Override
+    @Transactional(transactionManager = "infoTransactionManager")
+    public List<Txxxb> getInfoTxxxb(String jsbh, String tx) {
+        return infoMapper.getInfoTxxxb(jsbh, tx);
     }
 
 }

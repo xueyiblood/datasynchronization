@@ -1,10 +1,7 @@
 package com.yc.datasynchronization.infosystem.service;
 
 
-import com.yc.datasynchronization.infosystem.entity.Lshjxx;
-import com.yc.datasynchronization.infosystem.entity.Rybdxx;
-import com.yc.datasynchronization.infosystem.entity.Ryjbxx;
-import com.yc.datasynchronization.infosystem.entity.Zpb;
+import com.yc.datasynchronization.infosystem.entity.*;
 
 
 import java.util.List;
@@ -21,6 +18,12 @@ public interface InfoService {
     List<Lshjxx> getInfoLshjxxb(String jsbh,String key);
 
     List<Rybdxx> getInfoRsrq(String jsbh);
+
+    List<Yljlb> getInfoYljib(String jsbh,String yl);
+
+    List<Tjcsdj> getInfoTjcsdj(String jsbh,String ty);
+
+    List<Txxxb> getInfoTxxxb(String jsbh, String tx);
 
 
 }

@@ -1,6 +1,9 @@
 package com.yc.datasynchronization.detentionhousecs.service.impl;
 
+import com.yc.datasynchronization.detentionhouse1.entity.SRybdxxb;
 import com.yc.datasynchronization.detentionhousecs.entity.SLshjxxb;
+import com.yc.datasynchronization.detentionhousecs.entity.STjcsdj;
+import com.yc.datasynchronization.detentionhousecs.entity.SYljlb;
 import com.yc.datasynchronization.detentionhousecs.mapper.DetentionCSMapper;
 import com.yc.datasynchronization.detentionhousecs.service.DetentionCSService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,25 @@ public class DetentionCSServiceImpl implements DetentionCSService {
 
     @Override
     @Transactional(transactionManager = "detentionCSTransactionManager")
-    public List<SLshjxxb> getCSLshjxxb() {
-        return detentionCSMapper.getCSLshjxxb();
+    public List<SLshjxxb> getCSLshjxxb(String hj) {
+        return detentionCSMapper.getCSLshjxxb(hj);
+    }
+
+    @Override
+    @Transactional(transactionManager = "detentionCSTransactionManager")
+    public List<SRybdxxb> getCSRsrq() {
+        return detentionCSMapper.getCSRsrq();
+    }
+
+    @Override
+    @Transactional(transactionManager = "detentionCSTransactionManager")
+    public List<SYljlb> getCSYljib(String yl) {
+        return detentionCSMapper.getCSYljib(yl);
+    }
+
+    @Override
+    @Transactional(transactionManager = "detentionCSTransactionManager")
+    public List<STjcsdj> getCSTjcsdj(String ty) {
+        return detentionCSMapper.getCSTjcsdj(ty);
     }
 }

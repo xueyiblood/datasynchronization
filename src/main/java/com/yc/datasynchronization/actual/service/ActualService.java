@@ -2,10 +2,7 @@ package com.yc.datasynchronization.actual.service;
 
 
 
-import com.yc.datasynchronization.actual.entity.LshjxxbKss;
-import com.yc.datasynchronization.actual.entity.RybdxxbKss;
-import com.yc.datasynchronization.actual.entity.RyjbxxbKss;
-import com.yc.datasynchronization.actual.entity.ZpbKss;
+import com.yc.datasynchronization.actual.entity.*;
 import com.yc.datasynchronization.infosystem.entity.Zpb;
 
 
@@ -43,5 +40,16 @@ public interface ActualService {
 
     int upaActualRybdxxRsrq(String rybh, Date rsrq);
 
+    List<YljlbKss> getActualSnyl(YljlbKss yljlbKss);
+
+    int insActualSnyl(YljlbKss yljlbKss);
+
+    List<TjcsdjKss> getActualTy(TjcsdjKss tjcsdjKss);
+
+    int insActualTy(TjcsdjKss tjcsdjKss);
+
+    List<TxxxbKss> getActualTx(TxxxbKss txxxbKss);
+
+    int insActualTx(TxxxbKss txxxbKss);
 
 }

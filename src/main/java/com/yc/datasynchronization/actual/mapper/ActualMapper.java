@@ -1,9 +1,7 @@
 package com.yc.datasynchronization.actual.mapper;
 
-import com.yc.datasynchronization.actual.entity.LshjxxbKss;
-import com.yc.datasynchronization.actual.entity.RybdxxbKss;
-import com.yc.datasynchronization.actual.entity.RyjbxxbKss;
-import com.yc.datasynchronization.actual.entity.ZpbKss;
+import com.yc.datasynchronization.actual.entity.*;
+import com.yc.datasynchronization.infosystem.entity.Txxxb;
 import com.yc.datasynchronization.infosystem.entity.Zpb;
 import org.apache.ibatis.annotations.*;
 
@@ -72,16 +70,52 @@ public interface ActualMapper {
             "#{snbx},#{hssj},#{jyrq},#{wzbf},#{faccode},#{czsjc},#{jsbh})")
     int insActualRybdxxb(RybdxxbKss rybdxx);
 
-    @Select("select * from Lshjxxb_kss where rybh = #{rybh} and hjkssj = #{hjkssj} " +
-            "and hjjssj = #{hjjssj} and lsdw = #{lsdw} and wtr = #{wtr}")
+    @Select("select * from Lshjxxb_kss where rybh = #{rybh} and lsxm = #{lsxm} and hjkssj = #{hjkssj} " +
+            "and hjjssj = #{hjjssj} and lsdw = #{lsdw} and tcry = #{tcry} and thry = #{thry} and czsjc = #{czsjc}")
     List<LshjxxbKss> getActualLshj(LshjxxbKss lshjxxbKss);
 
     @Insert("INSERT INTO LSHJXXB_KSS (ZYBH, RYBH,LSXM,LSZJH,RS,LSDW," +
             "PZR,HJKSSJ,GZNR,HJJSSJ,HJS,TCRY,THRY,JDMJ,WTR,sybjl,FACCODE,WJQRHSSJ,DHRY,WJQRCSSJ,DCRY,czsjc,JSBH)" +
-            "values ({zybh}, '{rybh}', '{lsxm}', '{lszjh}', '{rs}', '{lsdw}', '{pzr}', '{hjkssj}', '{gznr}', '{hjjssj}', '{hjs}', '{tcry}', '{thry}', '{jdmj}', '{wtr}'" +
-            ", '{sybjl}', '{faccode}', '{wjqrhssj}', '{dhry}', '{wjqrcssj}', '{dcry}', '{czsjc}', '{jsbh}');")
+            "values (#{zybh}, #{rybh}, #{lsxm}, #{lszjh}, #{rs}, #{lsdw}, #{pzr}, #{hjkssj,jdbcType=TIMESTAMP}, " +
+            "#{gznr}, #{hjjssj,jdbcType=TIMESTAMP}, #{hjs}, #{tcry}, #{thry}, #{jdmj}, #{wtr}" +
+            ", #{sybjl,jdbcType=TIMESTAMP}, #{faccode}, #{wjqrhssj,jdbcType=TIMESTAMP}, #{dhry}, " +
+            "#{wjqrcssj,jdbcType=TIMESTAMP}, #{dcry}, #{czsjc}, #{jsbh})")
     int insActualLshj(LshjxxbKss lshjxxbKss);
 
     @Update("update rybdxxb_kss set rsrq = #{rsrq} where rybh = #{rybh}")
     int upaActualRybdxxRsrq(@Param("rybh") String rybh,@Param("rsrq") Date rsrq);
+
+
+    @Select("select * from RY_YLJLB_KSS where bz = #{bz} and zs = #{zs} and zd = #{zd} and yz = #{yz} and rybh = #{rybh} and zlsj = #{zlsj} " +
+            "and zlys = #{zlys} and tz = #{tz} and jsbh = #{jsbh} and yltype ='所内就医'")
+    List<YljlbKss> getActualSnyl(YljlbKss yljlbKss);
+
+    @Insert("INSERT INTO RY_YLJLB_KSS (ZYBH, RYBH,ZLSJ,ZLYS,TZ,XY," +
+            "XL,TW,ZS,ZD,YZ,FYKSRQ,RYJSRQ,YM,YRJC,FYSL,FACCODE,CZFZ,YLTYPE,BZ,SYBJL,czsjc,JSBH)" +
+            "values (#{zybh}, #{rybh}, #{zlsj,jdbcType=TIMESTAMP}, #{zlys}, #{tz}, #{xy}, #{xl}, " +
+            "#{tw}, #{zs}, #{zd}, #{yz}, #{fyksrq,jdbcType=TIMESTAMP},#{ryjsrq,jdbcType=TIMESTAMP}, #{ym}, #{yrjc}" +
+            ",#{fysl}, #{faccode}, #{czfz}, #{yltype}, #{bz}, #{sybjl,jdbcType=TIMESTAMP}, #{czsjc}, #{jsbh})")
+    int insActualSnyl(YljlbKss yljlbKss);
+
+    @Select("select * from TJCSDJB_KSS where rybh = #{rybh} and djrq = #{djrq} and cssj = #{cssj} " +
+            "and hssj = #{hssj} and cbdw = #{cbdw} and cbr = #{cbr} and czsjc = #{czsjc} and jsbh = #{jsbh}")
+    List<TjcsdjKss> getActualTy(TjcsdjKss tjcsdjKss);
+
+    @Insert("INSERT INTO TJCSDJB_KSS (ZYBH, RYBH,DJRQ,SSJD,CSSJ,SY," +
+            "HSSJ,CBDW,CBR,PZR,TCRY,THRY,BZ,czsjc,JSBH)" +
+            "values (#{zybh}, #{rybh}, #{djrq,jdbcType=TIMESTAMP}, #{ssjd}, #{cssj,jdbcType=TIMESTAMP}, #{sy}, #{hssj,jdbcType=TIMESTAMP}, #{cbdw}, #{cbr}" +
+            ", #{pzr}, #{tcry}, #{thry}, #{bz}, #{czsjc}, #{jsbh})")
+    int insActualTy(TjcsdjKss tjcsdjKss);
+
+    @Select("select * from Txxxb_Kss where rybh = #{rybh} and badw = #{badw} and bar = #{bar} " +
+            "and debar = #{debar} and txkssj = #{txkssj,jdbcType=TIMESTAMP} and txjssj = #{txjssj,jdbcType=TIMESTAMP} and czsjc = #{czsjc} and jsbh = #{jsbh}")
+    List<TxxxbKss> getActualTx(TxxxbKss txxxbKss);
+
+    @Insert("INSERT INTO Txxxb_Kss (ZYBH, RYBH,BADW,BAR,ZJHM,DEBAR," +
+            "DEBARZJ,JSXBH,XWAY,SZYJ,SZ,SZQZRQ,TXKSSJ,TXJSSJ,TXDD,TCRY,THRY,JDMJ,BZ,TCRYID,THRYID,JDMJID,FACCODE,WJQRHSSJ,DHRY" +
+            ",WJQRCSSJ,DCRY,czsjc,sybjl,JSBH)" +
+            "values (#{zybh}, #{rybh}, #{badw}, #{bar}, #{zjhm}, #{debar}, #{debarzj}, #{jsxbh}, #{xway}" +
+            ", #{szyj}, #{sz}, #{szqzrq,jdbcType=TIMESTAMP}, #{txkssj,jdbcType=TIMESTAMP}, #{txjssj,jdbcType=TIMESTAMP}, #{txdd}, #{tcry}, #{thry}, #{jdmj}, #{bz}, #{tcryid}" +
+            ", #{thryid}, #{jdmjid}, #{faccode}, #{wjqrhssj,jdbcType=TIMESTAMP}, #{dhry}, #{wjqrcssj,jdbcType=TIMESTAMP}, #{dcry}, #{czsjc}, #{sybjl,jdbcType=TIMESTAMP}, #{jsbh})")
+    int insActualTx(TxxxbKss txxxbKss);
 }
