@@ -26,7 +26,7 @@ public interface InfoMapper {
 
     @Select({"<script>","select * from LSHJXXB_KSS where jsbh = #{jsbh}",
             "<if test='key == 0'>",
-            "and hjkssj > TO_DATE(to_char(SYSDATE-20/24/60,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
+            "and hjkssj > TO_DATE(to_char(SYSDATE-3,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
             "</if>",
             "</script>"})
     List<Lshjxx> getInfoLshjxxb(@Param("jsbh") String jsbh,@Param("key") String key);
