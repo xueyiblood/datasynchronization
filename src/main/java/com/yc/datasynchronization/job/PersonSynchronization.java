@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class PersonSynchronization {
      */
     //@Scheduled(cron = "0 */5 * * * ?")
     @Scheduled(cron = "*/10 * * * * ?")
-    public void personBasicInfoSynchronization(){
+    public void personBasicInfoSynchronization() {
 
         String hj = ConfigUtil.getConfig("HJ");
         //String rq = ConfigUtil.getConfig("RQ");
@@ -93,9 +94,9 @@ public class PersonSynchronization {
     }
 
     //信息-实战
-    public  void  infoAndActual(){
+    public void infoAndActual() {
         for (int i = 1; i <= 4; i++) {
-            List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("32050011"+i);
+            List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("32050011" + i);
 
             for (int j = 0; j < listInfoRyjbxxb.size(); j++) {
                 String infoRybh = listInfoRyjbxxb.get(j).getRybh();
@@ -170,19 +171,19 @@ public class PersonSynchronization {
                 actualRyjbxx.setRsqbx(infoRyjbxx.getRsqbx());
                 actualRyjbxx.setRsqbxfs(infoRyjbxx.getRsqbxfs());
                 actualRyjbxx.setSybjl(infoRyjbxx.getSybjl());
-                if(listActualRyjbxxb != null && !listActualRyjbxxb.isEmpty()){
+                if (listActualRyjbxxb != null && !listActualRyjbxxb.isEmpty()) {
                     //修改
                     actualService.updActualRyjbxxb(actualRyjbxx);
                     //System.out.println("jb修改成功");
-                }else {
+                } else {
                     //新增
                     actualService.insActualRyjbxxb(actualRyjbxx);
                     //System.out.println("jb新增成功");
                 }
 
                 List<RybdxxbKss> listActualRybdxxb = actualService.getActualRybdxxb(infoRybh);
-                    //先删除数据，再新增
-                if(listActualRybdxxb !=null && !listActualRybdxxb.isEmpty()){
+                //先删除数据，再新增
+                if (listActualRybdxxb != null && !listActualRybdxxb.isEmpty()) {
                     actualService.delActualRybdxxb(infoRybh);
                     //System.out.println("bd删除成功");
                 }
@@ -241,9 +242,9 @@ public class PersonSynchronization {
                 zpbKss.setPic(zpbInfo.getPic());
                 zpbKss.setSybjl(zpbInfo.getSybjl());
 
-                if (listActualZpb != null && !listActualZpb.isEmpty()){
+                if (listActualZpb != null && !listActualZpb.isEmpty()) {
                     actualService.delActualZpb(infoRybh);
-                   // System.out.println("zpb删除成功");
+                    // System.out.println("zpb删除成功");
                 }
                 actualService.insActualZpb(zpbKss);
                 //System.out.println("zpb新增成功");
@@ -253,155 +254,155 @@ public class PersonSynchronization {
     }
 
     //信息-一看
-    public  void infoAndDetention1(){
+    public void infoAndDetention1() {
 
-            List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("320500111");
-            for (int i = 0; i < listInfoRyjbxxb.size(); i++) {
-                String infoRybh = listInfoRyjbxxb.get(i).getRybh();
-                Ryjbxx infoRyjbxx = listInfoRyjbxxb.get(i);
-                //根据rybh查老一看ryjbxxb
-                List<SRyjbxxb> listSRyjbxx = detentionService.getDt1Ryjbxxb(infoRybh);
-                SRyjbxxb dt1Ryjbxx = new SRyjbxxb();
-                dt1Ryjbxx.setRybh(infoRyjbxx.getRybh());
-                dt1Ryjbxx.setJsbh(infoRyjbxx.getJsbh());
-                dt1Ryjbxx.setBh(infoRyjbxx.getBh());
-                dt1Ryjbxx.setXm(infoRyjbxx.getXm());
-                dt1Ryjbxx.setMzxm(infoRyjbxx.getMzxm());
-                dt1Ryjbxx.setBm(infoRyjbxx.getBm());
-                dt1Ryjbxx.setXb(infoRyjbxx.getXb());
-                dt1Ryjbxx.setCsrq(infoRyjbxx.getCsrq());
-                dt1Ryjbxx.setZzmm(infoRyjbxx.getZzmm());
-                dt1Ryjbxx.setZjlx(infoRyjbxx.getZjlx());
-                dt1Ryjbxx.setZjhm(infoRyjbxx.getZjhm());
-                dt1Ryjbxx.setHzh(infoRyjbxx.getHzh());
-                dt1Ryjbxx.setHyzk(infoRyjbxx.getHyzk());
-                dt1Ryjbxx.setMz(infoRyjbxx.getMz());
-                dt1Ryjbxx.setGj(infoRyjbxx.getGj());
-                dt1Ryjbxx.setJg(infoRyjbxx.getJg());
-                dt1Ryjbxx.setZc(infoRyjbxx.getZc());
-                dt1Ryjbxx.setWhcd(infoRyjbxx.getWhcd());
-                dt1Ryjbxx.setZy(infoRyjbxx.getZy());
-                dt1Ryjbxx.setGzdw(infoRyjbxx.getGzdw());
-                dt1Ryjbxx.setZw(infoRyjbxx.getZw());
-                dt1Ryjbxx.setSf(infoRyjbxx.getSf());
-                dt1Ryjbxx.setTssf(infoRyjbxx.getTssf());
-                dt1Ryjbxx.setHjszd(infoRyjbxx.getHjszd());
-                dt1Ryjbxx.setHjdxz(infoRyjbxx.getHjdxz());
-                dt1Ryjbxx.setXzzqh(infoRyjbxx.getXzzqh());
-                dt1Ryjbxx.setXzzxz(infoRyjbxx.getXzzxz());
-                dt1Ryjbxx.setDah(infoRyjbxx.getDah());
-                dt1Ryjbxx.setZwbh(infoRyjbxx.getZwbh());
-                dt1Ryjbxx.setBz(infoRyjbxx.getBz());
-                dt1Ryjbxx.setJsh(infoRyjbxx.getJsh());
-                dt1Ryjbxx.setGyqx(infoRyjbxx.getGyqx());
-                dt1Ryjbxx.setRybj(infoRyjbxx.getRybj());
-                dt1Ryjbxx.setPyzt(infoRyjbxx.getPyzt());
-                dt1Ryjbxx.setCzr(infoRyjbxx.getCzr());
-                dt1Ryjbxx.setSdrq(infoRyjbxx.getSdrq());
-                dt1Ryjbxx.setFlwsh(infoRyjbxx.getFlwsh());
-                dt1Ryjbxx.setHyrq(infoRyjbxx.getHyrq());
-                dt1Ryjbxx.setSsjd(infoRyjbxx.getSsjd());
-                dt1Ryjbxx.setBadw(infoRyjbxx.getBadw());
-                dt1Ryjbxx.setBadwlx(infoRyjbxx.getBadwlx());
-                dt1Ryjbxx.setBar(infoRyjbxx.getBar());
-                dt1Ryjbxx.setClsj(infoRyjbxx.getClsj());
-                dt1Ryjbxx.setCljg(infoRyjbxx.getCljg());
-                dt1Ryjbxx.setXq(infoRyjbxx.getXq());
-                dt1Ryjbxx.setXqksrq(infoRyjbxx.getXqksrq());
-                dt1Ryjbxx.setXqjzrq(infoRyjbxx.getXqjzrq());
-                dt1Ryjbxx.setFjcl(infoRyjbxx.getFjcl());
-                dt1Ryjbxx.setFjclxq(infoRyjbxx.getFjclxq());
-                dt1Ryjbxx.setSsrq(infoRyjbxx.getSsrq());
-                dt1Ryjbxx.setZxrq(infoRyjbxx.getZxrq());
-                dt1Ryjbxx.setFjje(infoRyjbxx.getFjje());
-                dt1Ryjbxx.setHxxq(infoRyjbxx.getHxxq());
-                dt1Ryjbxx.setSpz(infoRyjbxx.getSpz());
-                dt1Ryjbxx.setBardh(infoRyjbxx.getBardh());
-                dt1Ryjbxx.setWxdj(infoRyjbxx.getWxdj());
-                dt1Ryjbxx.setFh(infoRyjbxx.getFh());
-                dt1Ryjbxx.setCzsjc(infoRyjbxx.getCzsjc());
-                dt1Ryjbxx.setJbxxlb(infoRyjbxx.getJbxxlb());
-                dt1Ryjbxx.setStxxlb(infoRyjbxx.getStxxlb());
-                dt1Ryjbxx.setZhxxlb(infoRyjbxx.getZhxxlb());
-                dt1Ryjbxx.setJbxxzfs(infoRyjbxx.getJbxxzfs());
-                dt1Ryjbxx.setStxxzfs(infoRyjbxx.getStxxzfs());
-                dt1Ryjbxx.setZhxxzfs(infoRyjbxx.getZhxxzfs());
-                dt1Ryjbxx.setRsqbx(infoRyjbxx.getRsqbx());
-                dt1Ryjbxx.setRsqbxfs(infoRyjbxx.getRsqbxfs());
-                dt1Ryjbxx.setYxlshj(infoRyjbxx.getYxlshj());
+        List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("320500111");
+        for (int i = 0; i < listInfoRyjbxxb.size(); i++) {
+            String infoRybh = listInfoRyjbxxb.get(i).getRybh();
+            Ryjbxx infoRyjbxx = listInfoRyjbxxb.get(i);
+            //根据rybh查老一看ryjbxxb
+            List<SRyjbxxb> listSRyjbxx = detentionService.getDt1Ryjbxxb(infoRybh);
+            SRyjbxxb dt1Ryjbxx = new SRyjbxxb();
+            dt1Ryjbxx.setRybh(infoRyjbxx.getRybh());
+            dt1Ryjbxx.setJsbh(infoRyjbxx.getJsbh());
+            dt1Ryjbxx.setBh(infoRyjbxx.getBh());
+            dt1Ryjbxx.setXm(infoRyjbxx.getXm());
+            dt1Ryjbxx.setMzxm(infoRyjbxx.getMzxm());
+            dt1Ryjbxx.setBm(infoRyjbxx.getBm());
+            dt1Ryjbxx.setXb(infoRyjbxx.getXb());
+            dt1Ryjbxx.setCsrq(infoRyjbxx.getCsrq());
+            dt1Ryjbxx.setZzmm(infoRyjbxx.getZzmm());
+            dt1Ryjbxx.setZjlx(infoRyjbxx.getZjlx());
+            dt1Ryjbxx.setZjhm(infoRyjbxx.getZjhm());
+            dt1Ryjbxx.setHzh(infoRyjbxx.getHzh());
+            dt1Ryjbxx.setHyzk(infoRyjbxx.getHyzk());
+            dt1Ryjbxx.setMz(infoRyjbxx.getMz());
+            dt1Ryjbxx.setGj(infoRyjbxx.getGj());
+            dt1Ryjbxx.setJg(infoRyjbxx.getJg());
+            dt1Ryjbxx.setZc(infoRyjbxx.getZc());
+            dt1Ryjbxx.setWhcd(infoRyjbxx.getWhcd());
+            dt1Ryjbxx.setZy(infoRyjbxx.getZy());
+            dt1Ryjbxx.setGzdw(infoRyjbxx.getGzdw());
+            dt1Ryjbxx.setZw(infoRyjbxx.getZw());
+            dt1Ryjbxx.setSf(infoRyjbxx.getSf());
+            dt1Ryjbxx.setTssf(infoRyjbxx.getTssf());
+            dt1Ryjbxx.setHjszd(infoRyjbxx.getHjszd());
+            dt1Ryjbxx.setHjdxz(infoRyjbxx.getHjdxz());
+            dt1Ryjbxx.setXzzqh(infoRyjbxx.getXzzqh());
+            dt1Ryjbxx.setXzzxz(infoRyjbxx.getXzzxz());
+            dt1Ryjbxx.setDah(infoRyjbxx.getDah());
+            dt1Ryjbxx.setZwbh(infoRyjbxx.getZwbh());
+            dt1Ryjbxx.setBz(infoRyjbxx.getBz());
+            dt1Ryjbxx.setJsh(infoRyjbxx.getJsh());
+            dt1Ryjbxx.setGyqx(infoRyjbxx.getGyqx());
+            dt1Ryjbxx.setRybj(infoRyjbxx.getRybj());
+            dt1Ryjbxx.setPyzt(infoRyjbxx.getPyzt());
+            dt1Ryjbxx.setCzr(infoRyjbxx.getCzr());
+            dt1Ryjbxx.setSdrq(infoRyjbxx.getSdrq());
+            dt1Ryjbxx.setFlwsh(infoRyjbxx.getFlwsh());
+            dt1Ryjbxx.setHyrq(infoRyjbxx.getHyrq());
+            dt1Ryjbxx.setSsjd(infoRyjbxx.getSsjd());
+            dt1Ryjbxx.setBadw(infoRyjbxx.getBadw());
+            dt1Ryjbxx.setBadwlx(infoRyjbxx.getBadwlx());
+            dt1Ryjbxx.setBar(infoRyjbxx.getBar());
+            dt1Ryjbxx.setClsj(infoRyjbxx.getClsj());
+            dt1Ryjbxx.setCljg(infoRyjbxx.getCljg());
+            dt1Ryjbxx.setXq(infoRyjbxx.getXq());
+            dt1Ryjbxx.setXqksrq(infoRyjbxx.getXqksrq());
+            dt1Ryjbxx.setXqjzrq(infoRyjbxx.getXqjzrq());
+            dt1Ryjbxx.setFjcl(infoRyjbxx.getFjcl());
+            dt1Ryjbxx.setFjclxq(infoRyjbxx.getFjclxq());
+            dt1Ryjbxx.setSsrq(infoRyjbxx.getSsrq());
+            dt1Ryjbxx.setZxrq(infoRyjbxx.getZxrq());
+            dt1Ryjbxx.setFjje(infoRyjbxx.getFjje());
+            dt1Ryjbxx.setHxxq(infoRyjbxx.getHxxq());
+            dt1Ryjbxx.setSpz(infoRyjbxx.getSpz());
+            dt1Ryjbxx.setBardh(infoRyjbxx.getBardh());
+            dt1Ryjbxx.setWxdj(infoRyjbxx.getWxdj());
+            dt1Ryjbxx.setFh(infoRyjbxx.getFh());
+            dt1Ryjbxx.setCzsjc(infoRyjbxx.getCzsjc());
+            dt1Ryjbxx.setJbxxlb(infoRyjbxx.getJbxxlb());
+            dt1Ryjbxx.setStxxlb(infoRyjbxx.getStxxlb());
+            dt1Ryjbxx.setZhxxlb(infoRyjbxx.getZhxxlb());
+            dt1Ryjbxx.setJbxxzfs(infoRyjbxx.getJbxxzfs());
+            dt1Ryjbxx.setStxxzfs(infoRyjbxx.getStxxzfs());
+            dt1Ryjbxx.setZhxxzfs(infoRyjbxx.getZhxxzfs());
+            dt1Ryjbxx.setRsqbx(infoRyjbxx.getRsqbx());
+            dt1Ryjbxx.setRsqbxfs(infoRyjbxx.getRsqbxfs());
+            dt1Ryjbxx.setYxlshj(infoRyjbxx.getYxlshj());
 
-                if(listSRyjbxx != null && !listSRyjbxx.isEmpty()){
-                    //修改
-                    detentionService.updDt1Ryjbxxb(dt1Ryjbxx);
-                }else {
-                    //新增
-                    detentionService.insDt1Ryjbxxb(dt1Ryjbxx);
-                }
-                //根据rybh查老一看rybdxxb
-                List<SRybdxxb> listSRybdxx = detentionService.getDt1Rybdxxb(infoRybh);
-                //先删除再新增
-                detentionService.delDt1Rybdxxb(infoRybh);
-                List<Rybdxx> infoRybdxx = infoService.getInfoRybdxxb(infoRybh);
-                SRybdxxb dt1Rybdxx = new SRybdxxb();
-                dt1Rybdxx.setRybh(infoRybdxx.get(0).getRybh());
-                dt1Rybdxx.setDbrq(infoRybdxx.get(0).getDbrq());
-                dt1Rybdxx.setJlrq(infoRybdxx.get(0).getJlrq());
-                dt1Rybdxx.setRsrq(infoRybdxx.get(0).getRsrq());
-                dt1Rybdxx.setRsyy(infoRybdxx.get(0).getRsyy());
-                dt1Rybdxx.setSypz(infoRybdxx.get(0).getSypz());
-                dt1Rybdxx.setZldw(infoRybdxx.get(0).getZldw());
-                dt1Rybdxx.setSydw(infoRybdxx.get(0).getSydw());
-                dt1Rybdxx.setSyr(infoRybdxx.get(0).getSyr());
-                dt1Rybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
-                dt1Rybdxx.setBz(infoRybdxx.get(0).getBz());
-                dt1Rybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
-                dt1Rybdxx.setCylb(infoRybdxx.get(0).getCylb());
-                dt1Rybdxx.setAjlb(infoRybdxx.get(0).getAjlb());
-                dt1Rybdxx.setJyaq(infoRybdxx.get(0).getJyaq());
-                dt1Rybdxx.setZxf(infoRybdxx.get(0).getZxf());
-                dt1Rybdxx.setRygllb(infoRybdxx.get(0).getRygllb());
-                dt1Rybdxx.setBadw(infoRybdxx.get(0).getBadw());
-                dt1Rybdxx.setPzrq(infoRybdxx.get(0).getPzrq());
-                dt1Rybdxx.setPzdw(infoRybdxx.get(0).getPzdw());
-                dt1Rybdxx.setPzr(infoRybdxx.get(0).getPzr());
-                dt1Rybdxx.setCsrq(infoRybdxx.get(0).getCsrq());
-                dt1Rybdxx.setCsyy(infoRybdxx.get(0).getCsyy());
-                dt1Rybdxx.setCsqx(infoRybdxx.get(0).getCsqx());
-                dt1Rybdxx.setJddw(infoRybdxx.get(0).getJddw());
-                dt1Rybdxx.setDbr(infoRybdxx.get(0).getDbr());
-                dt1Rybdxx.setDbryzyrgx(infoRybdxx.get(0).getDbryzyrgx());
-                dt1Rybdxx.setDbrzz(infoRybdxx.get(0).getDbrzz());
-                dt1Rybdxx.setDbrgzdw(infoRybdxx.get(0).getDbrgzdw());
-                dt1Rybdxx.setSnbx(infoRybdxx.get(0).getSnbx());
-                dt1Rybdxx.setHssj(infoRybdxx.get(0).getHssj());
-                dt1Rybdxx.setJyrq(infoRybdxx.get(0).getJyrq());
-                dt1Rybdxx.setWzbf(infoRybdxx.get(0).getWzbf());
-                dt1Rybdxx.setFaccode(infoRybdxx.get(0).getWzbf());
-                dt1Rybdxx.setCzsjc(infoRybdxx.get(0).getCzsjc());
-                dt1Rybdxx.setJsbh(infoRybdxx.get(0).getZyjsbh());
-                dt1Rybdxx.setSybjl(infoRybdxx.get(0).getSybjl());
-                detentionService.insDt1Rybdxxb(dt1Rybdxx);
-
-                //根据rybh查老一看zpb
-                List<SZpb> listSZpb = detentionService.getDt1Zpb(infoRybh);
-
-                if(listSZpb != null && !listSZpb.isEmpty()){
-                    //删除
-                    detentionService.delDt1Zpb(infoRybh);
-                }
+            if (listSRyjbxx != null && !listSRyjbxx.isEmpty()) {
+                //修改
+                detentionService.updDt1Ryjbxxb(dt1Ryjbxx);
+            } else {
                 //新增
-                SZpb sZpb = new SZpb();
-                Zpb zpb =infoService.getInfoZpb(infoRybh);
-                sZpb.setRybh(zpb.getRybh());
-                sZpb.setZybh(zpb.getZybh());
-                sZpb.setPic(zpb.getPic());
-                sZpb.setCzsjc(zpb.getCzsjc());
-                detentionService.insDt1Zpb(sZpb);
+                detentionService.insDt1Ryjbxxb(dt1Ryjbxx);
             }
+            //根据rybh查老一看rybdxxb
+            List<SRybdxxb> listSRybdxx = detentionService.getDt1Rybdxxb(infoRybh);
+            //先删除再新增
+            detentionService.delDt1Rybdxxb(infoRybh);
+            List<Rybdxx> infoRybdxx = infoService.getInfoRybdxxb(infoRybh);
+            SRybdxxb dt1Rybdxx = new SRybdxxb();
+            dt1Rybdxx.setRybh(infoRybdxx.get(0).getRybh());
+            dt1Rybdxx.setDbrq(infoRybdxx.get(0).getDbrq());
+            dt1Rybdxx.setJlrq(infoRybdxx.get(0).getJlrq());
+            dt1Rybdxx.setRsrq(infoRybdxx.get(0).getRsrq());
+            dt1Rybdxx.setRsyy(infoRybdxx.get(0).getRsyy());
+            dt1Rybdxx.setSypz(infoRybdxx.get(0).getSypz());
+            dt1Rybdxx.setZldw(infoRybdxx.get(0).getZldw());
+            dt1Rybdxx.setSydw(infoRybdxx.get(0).getSydw());
+            dt1Rybdxx.setSyr(infoRybdxx.get(0).getSyr());
+            dt1Rybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
+            dt1Rybdxx.setBz(infoRybdxx.get(0).getBz());
+            dt1Rybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
+            dt1Rybdxx.setCylb(infoRybdxx.get(0).getCylb());
+            dt1Rybdxx.setAjlb(infoRybdxx.get(0).getAjlb());
+            dt1Rybdxx.setJyaq(infoRybdxx.get(0).getJyaq());
+            dt1Rybdxx.setZxf(infoRybdxx.get(0).getZxf());
+            dt1Rybdxx.setRygllb(infoRybdxx.get(0).getRygllb());
+            dt1Rybdxx.setBadw(infoRybdxx.get(0).getBadw());
+            dt1Rybdxx.setPzrq(infoRybdxx.get(0).getPzrq());
+            dt1Rybdxx.setPzdw(infoRybdxx.get(0).getPzdw());
+            dt1Rybdxx.setPzr(infoRybdxx.get(0).getPzr());
+            dt1Rybdxx.setCsrq(infoRybdxx.get(0).getCsrq());
+            dt1Rybdxx.setCsyy(infoRybdxx.get(0).getCsyy());
+            dt1Rybdxx.setCsqx(infoRybdxx.get(0).getCsqx());
+            dt1Rybdxx.setJddw(infoRybdxx.get(0).getJddw());
+            dt1Rybdxx.setDbr(infoRybdxx.get(0).getDbr());
+            dt1Rybdxx.setDbryzyrgx(infoRybdxx.get(0).getDbryzyrgx());
+            dt1Rybdxx.setDbrzz(infoRybdxx.get(0).getDbrzz());
+            dt1Rybdxx.setDbrgzdw(infoRybdxx.get(0).getDbrgzdw());
+            dt1Rybdxx.setSnbx(infoRybdxx.get(0).getSnbx());
+            dt1Rybdxx.setHssj(infoRybdxx.get(0).getHssj());
+            dt1Rybdxx.setJyrq(infoRybdxx.get(0).getJyrq());
+            dt1Rybdxx.setWzbf(infoRybdxx.get(0).getWzbf());
+            dt1Rybdxx.setFaccode(infoRybdxx.get(0).getWzbf());
+            dt1Rybdxx.setCzsjc(infoRybdxx.get(0).getCzsjc());
+            dt1Rybdxx.setJsbh(infoRybdxx.get(0).getZyjsbh());
+            dt1Rybdxx.setSybjl(infoRybdxx.get(0).getSybjl());
+            detentionService.insDt1Rybdxxb(dt1Rybdxx);
+
+            //根据rybh查老一看zpb
+            List<SZpb> listSZpb = detentionService.getDt1Zpb(infoRybh);
+
+            if (listSZpb != null && !listSZpb.isEmpty()) {
+                //删除
+                detentionService.delDt1Zpb(infoRybh);
+            }
+            //新增
+            SZpb sZpb = new SZpb();
+            Zpb zpb = infoService.getInfoZpb(infoRybh);
+            sZpb.setRybh(zpb.getRybh());
+            sZpb.setZybh(zpb.getZybh());
+            sZpb.setPic(zpb.getPic());
+            sZpb.setCzsjc(zpb.getCzsjc());
+            detentionService.insDt1Zpb(sZpb);
         }
+    }
 
     //信息-二看
-    public  void infoAndDetention2(){
+    public void infoAndDetention2() {
 
         List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("320500112");
         for (int i = 0; i < listInfoRyjbxxb.size(); i++) {
@@ -478,10 +479,10 @@ public class PersonSynchronization {
             dt2Ryjbxx.setRsqbxfs(infoRyjbxx.getRsqbxfs());
             dt2Ryjbxx.setYxlshj(infoRyjbxx.getYxlshj());
 
-            if(listSRyjbxx != null && !listSRyjbxx.isEmpty()){
+            if (listSRyjbxx != null && !listSRyjbxx.isEmpty()) {
                 //修改
                 detention2Service.updDt2Ryjbxxb(dt2Ryjbxx);
-            }else {
+            } else {
                 //新增
                 detention2Service.insDt2Ryjbxxb(dt2Ryjbxx);
             }
@@ -533,13 +534,13 @@ public class PersonSynchronization {
             //根据rybh查老二看zpb
             List<SZpb> listSZpb = detention2Service.getDt2Zpb(infoRybh);
 
-            if(listSZpb != null && !listSZpb.isEmpty()){
+            if (listSZpb != null && !listSZpb.isEmpty()) {
                 //删除
                 detention2Service.delDt2Zpb(infoRybh);
             }
             //新增
             SZpb sZpb = new SZpb();
-            Zpb zpb =infoService.getInfoZpb(infoRybh);
+            Zpb zpb = infoService.getInfoZpb(infoRybh);
             sZpb.setRybh(zpb.getRybh());
             sZpb.setZybh(zpb.getZybh());
             sZpb.setPic(zpb.getPic());
@@ -549,7 +550,7 @@ public class PersonSynchronization {
     }
 
     //信息-三看
-    public  void infoAndDetention3(){
+    public void infoAndDetention3() {
 
         List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("320500113");
         for (int i = 0; i < listInfoRyjbxxb.size(); i++) {
@@ -626,10 +627,10 @@ public class PersonSynchronization {
             dt3Ryjbxx.setRsqbxfs(infoRyjbxx.getRsqbxfs());
             dt3Ryjbxx.setYxlshj(infoRyjbxx.getYxlshj());
 
-            if(listSRyjbxx != null && !listSRyjbxx.isEmpty()){
+            if (listSRyjbxx != null && !listSRyjbxx.isEmpty()) {
                 //修改
                 detention3Service.updDt3Ryjbxxb(dt3Ryjbxx);
-            }else {
+            } else {
                 //新增
                 detention3Service.insDt3Ryjbxxb(dt3Ryjbxx);
             }
@@ -681,13 +682,13 @@ public class PersonSynchronization {
             //根据rybh查老三看zpb
             List<SZpb> listSZpb = detention3Service.getDt3Zpb(infoRybh);
 
-            if(listSZpb != null && !listSZpb.isEmpty()){
+            if (listSZpb != null && !listSZpb.isEmpty()) {
                 //删除
                 detention3Service.delDt3Zpb(infoRybh);
             }
             //新增
             SZpb sZpb = new SZpb();
-            Zpb zpb =infoService.getInfoZpb(infoRybh);
+            Zpb zpb = infoService.getInfoZpb(infoRybh);
             sZpb.setRybh(zpb.getRybh());
             sZpb.setZybh(zpb.getZybh());
             sZpb.setPic(zpb.getPic());
@@ -697,7 +698,7 @@ public class PersonSynchronization {
     }
 
     //信息-四看
-    public  void infoAndDetention4(){
+    public void infoAndDetention4() {
 
         List<Ryjbxx> listInfoRyjbxxb = infoService.getInfoRyjbxxb("320500114");
         for (int i = 0; i < listInfoRyjbxxb.size(); i++) {
@@ -774,10 +775,10 @@ public class PersonSynchronization {
             dt4Ryjbxx.setRsqbxfs(infoRyjbxx.getRsqbxfs());
             dt4Ryjbxx.setYxlshj(infoRyjbxx.getYxlshj());
 
-            if(listSRyjbxx != null && !listSRyjbxx.isEmpty()){
+            if (listSRyjbxx != null && !listSRyjbxx.isEmpty()) {
                 //修改
                 detention4Service.updDt4Ryjbxxb(dt4Ryjbxx);
-            }else {
+            } else {
                 //新增
                 detention4Service.insDt4Ryjbxxb(dt4Ryjbxx);
             }
@@ -829,13 +830,13 @@ public class PersonSynchronization {
             //根据rybh查老四看zpb
             List<SZpb> listSZpb = detention4Service.getDt4Zpb(infoRybh);
 
-            if(listSZpb != null && !listSZpb.isEmpty()){
+            if (listSZpb != null && !listSZpb.isEmpty()) {
                 //删除
                 detention4Service.delDt4Zpb(infoRybh);
             }
             //新增
             SZpb sZpb = new SZpb();
-            Zpb zpb =infoService.getInfoZpb(infoRybh);
+            Zpb zpb = infoService.getInfoZpb(infoRybh);
             sZpb.setRybh(zpb.getRybh());
             sZpb.setZybh(zpb.getZybh());
             sZpb.setPic(zpb.getPic());
@@ -845,8 +846,8 @@ public class PersonSynchronization {
     }
 
     //律师会见 信息-实战
-    public  void  infoAndActualLshj(String hj){
-        String [] str = new String[4];
+    public void infoAndActualLshj(String hj) {
+        String[] str = new String[4];
         str[0] = "320500111";
         str[1] = "320500112";
         str[2] = "320500113";
@@ -859,47 +860,47 @@ public class PersonSynchronization {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i <str.length; i++) {
-            try{
+        for (int i = 0; i < str.length; i++) {
+            try {
 
-                List<Lshjxx> listInfoLshj = infoService.getInfoLshjxxb(str[i],hj);
-                System.out.println(i+"看");
+                List<Lshjxx> listInfoLshj = infoService.getInfoLshjxxb(str[i], hj);
+                System.out.println(i + "看");
                 for (int j = 0; j < listInfoLshj.size(); j++) {
                     Lshjxx infoLshjxx = listInfoLshj.get(j);
                     LshjxxbKss actualLshjxx1 = new LshjxxbKss();
                     actualLshjxx1.setRybh(infoLshjxx.getRybh());
                     actualLshjxx1.setHjkssj(infoLshjxx.getHjkssj());
                     actualLshjxx1.setHjjssj(infoLshjxx.getHjjssj());
-                    if(infoLshjxx.getLsdw()==null){
+                    if (infoLshjxx.getLsdw() == null) {
                         actualLshjxx1.setLsdw("");
-                    }else {
+                    } else {
                         actualLshjxx1.setLsdw(infoLshjxx.getLsdw());
                     }
                     actualLshjxx1.setJsbh(infoLshjxx.getZyjsbh());
-                    if(infoLshjxx.getTcry() == null){
+                    if (infoLshjxx.getTcry() == null) {
                         actualLshjxx1.setTcry("");
-                    }else {
+                    } else {
                         actualLshjxx1.setTcry(infoLshjxx.getTcry());
                     }
-                    if(infoLshjxx.getThry() == null){
+                    if (infoLshjxx.getThry() == null) {
                         actualLshjxx1.setThry("");
-                    }else {
+                    } else {
                         actualLshjxx1.setThry(infoLshjxx.getThry());
                     }
                     actualLshjxx1.setCzsjc(infoLshjxx.getCzsjc());
-                    if(infoLshjxx.getLsxm()==null){
+                    if (infoLshjxx.getLsxm() == null) {
                         actualLshjxx1.setLsxm("");
-                    }else {
+                    } else {
                         actualLshjxx1.setLsxm(infoLshjxx.getLsxm());
                     }
                     List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-                    if(null == listActualLshjxx || listActualLshjxx.size()==0){
+                    if (null == listActualLshjxx || listActualLshjxx.size() == 0) {
                         LshjxxbKss actualLshjxx2 = new LshjxxbKss();
                         actualLshjxx2.setZybh(infoLshjxx.getZybh());
                         actualLshjxx2.setRybh(infoLshjxx.getRybh());
-                        if(infoLshjxx.getLsxm()==null){
+                        if (infoLshjxx.getLsxm() == null) {
                             actualLshjxx2.setLsxm("");
-                        }else {
+                        } else {
                             actualLshjxx2.setLsxm(infoLshjxx.getLsxm());
                         }
                         actualLshjxx2.setLszjh(infoLshjxx.getLszjh());
@@ -907,33 +908,33 @@ public class PersonSynchronization {
                         actualLshjxx2.setPzr(infoLshjxx.getPzr());
                         actualLshjxx2.setGznr(infoLshjxx.getGznr());
                         actualLshjxx2.setHjs(infoLshjxx.getHjs());
-                        if(infoLshjxx.getTcry() == null){
+                        if (infoLshjxx.getTcry() == null) {
                             actualLshjxx2.setTcry("");
-                        }else {
+                        } else {
                             actualLshjxx2.setTcry(infoLshjxx.getTcry());
                         }
-                        if(infoLshjxx.getThry() == null){
+                        if (infoLshjxx.getThry() == null) {
                             actualLshjxx2.setThry("");
-                        }else {
+                        } else {
                             actualLshjxx2.setThry(infoLshjxx.getThry());
                         }
                         actualLshjxx2.setJdmj(infoLshjxx.getJdmj());
                         actualLshjxx2.setHjkssj(infoLshjxx.getHjkssj());
                         actualLshjxx2.setHjjssj(infoLshjxx.getHjjssj());
-                        if(infoLshjxx.getLsdw()==null){
+                        if (infoLshjxx.getLsdw() == null) {
                             actualLshjxx2.setLsdw("");
-                        }else {
+                        } else {
                             actualLshjxx2.setLsdw(infoLshjxx.getLsdw());
                         }
-                        if(infoLshjxx.getWtr() == null){
+                        if (infoLshjxx.getWtr() == null) {
                             actualLshjxx2.setWtr("");
-                        }else {
+                        } else {
                             actualLshjxx2.setWtr(infoLshjxx.getWtr());
                         }
                         actualLshjxx2.setFaccode(infoLshjxx.getFaccode());
-                        if(infoLshjxx.getWjqrcssj()==null){
+                        if (infoLshjxx.getWjqrcssj() == null) {
                             actualLshjxx2.setWjqrcssj(djrq);
-                        }else {
+                        } else {
                             actualLshjxx2.setWjqrcssj(infoLshjxx.getWjqrcssj());
                         }
                         actualLshjxx2.setWjqrhssj(infoLshjxx.getWjqrhssj());
@@ -943,18 +944,19 @@ public class PersonSynchronization {
                         actualLshjxx2.setJsbh(infoLshjxx.getZyjsbh());
                         actualLshjxx2.setSybjl(infoLshjxx.getSybjl());
                         actualService.insActualLshj(actualLshjxx2);
-                        System.out.println("律师新增:"+infoLshjxx.getRybh());
-                    }else {
-                        System.out.println("律师去重:"+infoLshjxx.getRybh());                }
+                        System.out.println("律师新增:" + infoLshjxx.getRybh());
+                    } else {
+                        System.out.println("律师去重:" + infoLshjxx.getRybh());
+                    }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     //律师会见 常熟-实战
-    public  void csAndActualLshj1(String hj){
+    public void csAndActualLshj1(String hj) {
         List<SLshjxxb> listCSLshj = detentionCSService.getCSLshjxxb(hj);
         for (int i = 0; i < listCSLshj.size(); i++) {
             String infoRybh = listCSLshj.get(i).getRybh();
@@ -966,7 +968,7 @@ public class PersonSynchronization {
             actualLshjxx1.setLsdw(sLshjxx.getLsdw());
             actualLshjxx1.setWtr(sLshjxx.getWtr());
             List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-            if(listActualLshjxx == null && listActualLshjxx.isEmpty()){
+            if (listActualLshjxx == null && listActualLshjxx.isEmpty()) {
                 LshjxxbKss actualLshjxx2 = new LshjxxbKss();
                 actualLshjxx2.setZybh(sLshjxx.getZybh());
                 actualLshjxx2.setRybh(infoRybh);
@@ -977,7 +979,7 @@ public class PersonSynchronization {
                 actualLshjxx2.setGznr(sLshjxx.getGznr());
                 actualLshjxx2.setHjs(sLshjxx.getHjs());
                 actualLshjxx2.setTcry(sLshjxx.getTcry());
-                actualLshjxx2.setThry(sLshjxx.getThry()) ;
+                actualLshjxx2.setThry(sLshjxx.getThry());
                 actualLshjxx2.setJdmj(sLshjxx.getJdmj());
                 actualLshjxx2.setHjkssj(sLshjxx.getHjkssj());
                 actualLshjxx2.setHjjssj(sLshjxx.getHjjssj());
@@ -996,7 +998,7 @@ public class PersonSynchronization {
     }
 
     //律师会见 太仓-实战
-    public  void tcAndActualLshj2(String hj){
+    public void tcAndActualLshj2(String hj) {
         List<SLshjxxb> listTCLshj = detentionTCService.getTCLshjxxb(hj);
         for (int i = 0; i < listTCLshj.size(); i++) {
             String infoRybh = listTCLshj.get(i).getRybh();
@@ -1008,7 +1010,7 @@ public class PersonSynchronization {
             actualLshjxx1.setLsdw(sLshjxx.getLsdw());
             actualLshjxx1.setWtr(sLshjxx.getWtr());
             List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-            if(listActualLshjxx == null && listActualLshjxx.isEmpty()){
+            if (listActualLshjxx == null && listActualLshjxx.isEmpty()) {
                 LshjxxbKss actualLshjxx2 = new LshjxxbKss();
                 actualLshjxx2.setZybh(sLshjxx.getZybh());
                 actualLshjxx2.setRybh(infoRybh);
@@ -1019,7 +1021,7 @@ public class PersonSynchronization {
                 actualLshjxx2.setGznr(sLshjxx.getGznr());
                 actualLshjxx2.setHjs(sLshjxx.getHjs());
                 actualLshjxx2.setTcry(sLshjxx.getTcry());
-                actualLshjxx2.setThry(sLshjxx.getThry()) ;
+                actualLshjxx2.setThry(sLshjxx.getThry());
                 actualLshjxx2.setJdmj(sLshjxx.getJdmj());
                 actualLshjxx2.setHjkssj(sLshjxx.getHjkssj());
                 actualLshjxx2.setHjjssj(sLshjxx.getHjjssj());
@@ -1038,7 +1040,7 @@ public class PersonSynchronization {
     }
 
     //律师会见 吴江-实战
-    public  void wjAndActualLshj3(String hj){
+    public void wjAndActualLshj3(String hj) {
         List<SLshjxxb> listWJLshj = detentionWJService.getWJLshjxxb(hj);
         for (int i = 0; i < listWJLshj.size(); i++) {
             String infoRybh = listWJLshj.get(i).getRybh();
@@ -1050,7 +1052,7 @@ public class PersonSynchronization {
             actualLshjxx1.setLsdw(sLshjxx.getLsdw());
             actualLshjxx1.setWtr(sLshjxx.getWtr());
             List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-            if(listActualLshjxx == null && listActualLshjxx.isEmpty()){
+            if (listActualLshjxx == null && listActualLshjxx.isEmpty()) {
                 LshjxxbKss actualLshjxx2 = new LshjxxbKss();
                 actualLshjxx2.setZybh(sLshjxx.getZybh());
                 actualLshjxx2.setRybh(infoRybh);
@@ -1061,7 +1063,7 @@ public class PersonSynchronization {
                 actualLshjxx2.setGznr(sLshjxx.getGznr());
                 actualLshjxx2.setHjs(sLshjxx.getHjs());
                 actualLshjxx2.setTcry(sLshjxx.getTcry());
-                actualLshjxx2.setThry(sLshjxx.getThry()) ;
+                actualLshjxx2.setThry(sLshjxx.getThry());
                 actualLshjxx2.setJdmj(sLshjxx.getJdmj());
                 actualLshjxx2.setHjkssj(sLshjxx.getHjkssj());
                 actualLshjxx2.setHjjssj(sLshjxx.getHjjssj());
@@ -1080,7 +1082,7 @@ public class PersonSynchronization {
     }
 
     //律师会见 张家港-实战
-    public  void zjgAndActualLshj4(String hj){
+    public void zjgAndActualLshj4(String hj) {
         List<SLshjxxb> listZJGLshj = detentionZJGService.getZJGLshjxxb(hj);
         for (int i = 0; i < listZJGLshj.size(); i++) {
             String infoRybh = listZJGLshj.get(i).getRybh();
@@ -1092,7 +1094,7 @@ public class PersonSynchronization {
             actualLshjxx1.setLsdw(sLshjxx.getLsdw());
             actualLshjxx1.setWtr(sLshjxx.getWtr());
             List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-            if(listActualLshjxx == null && listActualLshjxx.isEmpty()){
+            if (listActualLshjxx == null && listActualLshjxx.isEmpty()) {
                 LshjxxbKss actualLshjxx2 = new LshjxxbKss();
                 actualLshjxx2.setZybh(sLshjxx.getZybh());
                 actualLshjxx2.setRybh(infoRybh);
@@ -1103,7 +1105,7 @@ public class PersonSynchronization {
                 actualLshjxx2.setGznr(sLshjxx.getGznr());
                 actualLshjxx2.setHjs(sLshjxx.getHjs());
                 actualLshjxx2.setTcry(sLshjxx.getTcry());
-                actualLshjxx2.setThry(sLshjxx.getThry()) ;
+                actualLshjxx2.setThry(sLshjxx.getThry());
                 actualLshjxx2.setJdmj(sLshjxx.getJdmj());
                 actualLshjxx2.setHjkssj(sLshjxx.getHjkssj());
                 actualLshjxx2.setHjjssj(sLshjxx.getHjjssj());
@@ -1122,7 +1124,7 @@ public class PersonSynchronization {
     }
 
     //律师会见 昆山-实战
-    public  void ksAndActualLshj5(String hj){
+    public void ksAndActualLshj5(String hj) {
         List<SLshjxxb> listKSLshj = detentionKSService.getKSLshjxxb(hj);
         for (int i = 0; i < listKSLshj.size(); i++) {
             String infoRybh = listKSLshj.get(i).getRybh();
@@ -1134,7 +1136,7 @@ public class PersonSynchronization {
             actualLshjxx1.setLsdw(sLshjxx.getLsdw());
             actualLshjxx1.setWtr(sLshjxx.getWtr());
             List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-            if(listActualLshjxx == null && listActualLshjxx.isEmpty()){
+            if (listActualLshjxx == null && listActualLshjxx.isEmpty()) {
                 LshjxxbKss actualLshjxx2 = new LshjxxbKss();
                 actualLshjxx2.setZybh(sLshjxx.getZybh());
                 actualLshjxx2.setRybh(infoRybh);
@@ -1145,7 +1147,7 @@ public class PersonSynchronization {
                 actualLshjxx2.setGznr(sLshjxx.getGznr());
                 actualLshjxx2.setHjs(sLshjxx.getHjs());
                 actualLshjxx2.setTcry(sLshjxx.getTcry());
-                actualLshjxx2.setThry(sLshjxx.getThry()) ;
+                actualLshjxx2.setThry(sLshjxx.getThry());
                 actualLshjxx2.setJdmj(sLshjxx.getJdmj());
                 actualLshjxx2.setHjkssj(sLshjxx.getHjkssj());
                 actualLshjxx2.setHjjssj(sLshjxx.getHjjssj());
@@ -1164,7 +1166,7 @@ public class PersonSynchronization {
     }
 
     //入所日期 信息 - 实战
-    public  void infoAndActualRsrq(){
+    public void infoAndActualRsrq() {
 //        for (int i = 1; i <= 4 ; i++) {
 //            List<Rybdxx> listRybdxx = infoService.getInfoRsrq("32050011"+i);
 //            for (int j = 0; j < listRybdxx.size(); j++) {
@@ -1176,91 +1178,92 @@ public class PersonSynchronization {
 //            }
 //        }
 
-                List<RybdxxbKss> list = actualService.getActualRybdxxb("320500111202006290003");
-                SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
-                try {
-                    Date date = s.parse("2020-01-29 15:31:39");
-                    if(null == list || list.size()==0){
-                        actualService.upaActualRybdxxRsrq("320500111202006290003",date);
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
+        List<RybdxxbKss> list = actualService.getActualRybdxxb("320500111202006290003");
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
+        try {
+            Date date = s.parse("2020-01-29 15:31:39");
+            if (null == list || list.size() == 0) {
+                actualService.upaActualRybdxxRsrq("320500111202006290003", date);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
 
+    }
+
+
     //入所日期 常熟-实战
-    public void csAndActualRsrq(){
+    public void csAndActualRsrq() {
         List<SRybdxxb> listSRybdxx = detentionCSService.getCSRsrq();
         for (int i = 0; i < listSRybdxx.size(); i++) {
             String csRybh = listSRybdxx.get(i).getRybh();
             List<RybdxxbKss> list = actualService.getActualRybdxxb(csRybh);
-            if(list != null && list.isEmpty()){
-                actualService.upaActualRybdxxRsrq(csRybh,listSRybdxx.get(i).getRsrq());
+            if (list != null && list.isEmpty()) {
+                actualService.upaActualRybdxxRsrq(csRybh, listSRybdxx.get(i).getRsrq());
             }
         }
     }
 
     //入所日期 太仓-实战
-    public void tcAndActualRsrq(){
+    public void tcAndActualRsrq() {
         List<SRybdxxb> listSRybdxx = detentionTCService.getTCRsrq();
         for (int i = 0; i < listSRybdxx.size(); i++) {
             String tcRybh = listSRybdxx.get(i).getRybh();
             List<RybdxxbKss> list = actualService.getActualRybdxxb(tcRybh);
-            if(list != null && list.isEmpty()){
-                actualService.upaActualRybdxxRsrq(tcRybh,listSRybdxx.get(i).getRsrq());
+            if (list != null && list.isEmpty()) {
+                actualService.upaActualRybdxxRsrq(tcRybh, listSRybdxx.get(i).getRsrq());
             }
         }
     }
+
     //入所日期 吴江-实战
-    public void wjAndActualRsrq(){
+    public void wjAndActualRsrq() {
         List<SRybdxxb> listSRybdxx = detentionWJService.getWJRsrq();
         for (int i = 0; i < listSRybdxx.size(); i++) {
             String wjRybh = listSRybdxx.get(i).getRybh();
             List<RybdxxbKss> list = actualService.getActualRybdxxb(wjRybh);
-            if(list != null && list.isEmpty()){
-                actualService.upaActualRybdxxRsrq(wjRybh,listSRybdxx.get(i).getRsrq());
+            if (list != null && list.isEmpty()) {
+                actualService.upaActualRybdxxRsrq(wjRybh, listSRybdxx.get(i).getRsrq());
             }
         }
     }
 
     //入所日期 张家港-实战
-    public void zjgAndActualRsrq(){
+    public void zjgAndActualRsrq() {
         List<SRybdxxb> listSRybdxx = detentionZJGService.getZJGRsrq();
         for (int i = 0; i < listSRybdxx.size(); i++) {
             String zjgRybh = listSRybdxx.get(i).getRybh();
             List<RybdxxbKss> list = actualService.getActualRybdxxb(zjgRybh);
-            if(list != null && list.isEmpty()){
-                actualService.upaActualRybdxxRsrq(zjgRybh,listSRybdxx.get(i).getRsrq());
+            if (list != null && list.isEmpty()) {
+                actualService.upaActualRybdxxRsrq(zjgRybh, listSRybdxx.get(i).getRsrq());
             }
         }
     }
 
     //入所日期 昆山-实战
-    public void ksAndActualRsrq(){
+    public void ksAndActualRsrq() {
         List<SRybdxxb> listSRybdxx = detentionKSService.getKSRsrq();
         for (int i = 0; i < listSRybdxx.size(); i++) {
             String ksRybh = listSRybdxx.get(i).getRybh();
             List<RybdxxbKss> list = actualService.getActualRybdxxb(ksRybh);
-            if(list != null && list.isEmpty()){
-                actualService.upaActualRybdxxRsrq(ksRybh,listSRybdxx.get(i).getRsrq());
+            if (list != null && list.isEmpty()) {
+                actualService.upaActualRybdxxRsrq(ksRybh, listSRybdxx.get(i).getRsrq());
             }
         }
     }
 
     //所内医疗 信息-实战
-    public void infoAndActualSnyl(String yl){
-        String [] str = new String[4];
+    public void infoAndActualSnyl(String yl) {
+        String[] str = new String[4];
         str[0] = "320500111";
         str[1] = "320500112";
         str[2] = "320500113";
         str[3] = "320500114";
         for (int i = 0; i < str.length; i++) {
-            try{
-                List<Yljlb> listInfoSnyl = infoService.getInfoYljib("32050011"+i,yl);
-                System.out.println(i+"看");
+            try {
+                List<Yljlb> listInfoSnyl = infoService.getInfoYljib("32050011" + i, yl);
+                System.out.println(i + "看");
                 SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
                 Date djrq = null;
                 try {
@@ -1272,55 +1275,56 @@ public class PersonSynchronization {
                 for (int j = 0; j < listInfoSnyl.size(); j++) {
                     Yljlb infoYljlb = listInfoSnyl.get(j);
                     YljlbKss yljlb1 = new YljlbKss();
-                    if(infoYljlb.getRybh()==null){
+                    if (infoYljlb.getRybh() == null) {
                         yljlb1.setRybh("");
-                    }else {
+                    } else {
                         yljlb1.setRybh(infoYljlb.getRybh());
                     }
                     yljlb1.setRybh(infoYljlb.getRybh());
                     yljlb1.setZlsj(infoYljlb.getZlsj());
-                    if(infoYljlb.getTz()==null){
+                    if (infoYljlb.getTz() == null) {
                         yljlb1.setTz("");
-                    }else {
+                    } else {
                         yljlb1.setTz(infoYljlb.getTz());
                     }
                     yljlb1.setZlys(infoYljlb.getZlys());
                     yljlb1.setJsbh(infoYljlb.getZyjsbh());
-                    if(infoYljlb.getYz()==null){
+                    if (infoYljlb.getYz() == null) {
                         yljlb1.setYz("");
-                    }else {
+                    } else {
                         yljlb1.setYz(infoYljlb.getYz());
                     }
 
-                    if(infoYljlb.getBz()==null){
+                    if (infoYljlb.getBz() == null) {
                         yljlb1.setBz("");
-                    }else {
+                    } else {
                         yljlb1.setBz(infoYljlb.getBz());
                     }
 
-                    if(infoYljlb.getZs()==null){
+                    if (infoYljlb.getZs() == null) {
                         yljlb1.setZs("");
-                    }else {
+                    } else {
                         yljlb1.setZs(infoYljlb.getZs());
                     }
 
-                    if(infoYljlb.getZd()==null){
+                    if (infoYljlb.getZd() == null) {
                         yljlb1.setZd("");
-                    }else {
+                    } else {
                         yljlb1.setZd(infoYljlb.getZd());
                     }
                     List<YljlbKss> listActualYljibKss = actualService.getActualSnyl(yljlb1);
-                    if(null == listActualYljibKss || listActualYljibKss.size()==0){
+                    if (null == listActualYljibKss || listActualYljibKss.size() == 0) {
                         YljlbKss yljlb2 = new YljlbKss();
-                        if(infoYljlb.getRybh()==null){
+                        if (infoYljlb.getRybh() == null) {
                             yljlb2.setRybh("");
-                        }else {
+                        } else {
                             yljlb2.setRybh(infoYljlb.getRybh());
-                        }                        yljlb2.setRybh(infoYljlb.getRybh());
+                        }
+                        yljlb2.setRybh(infoYljlb.getRybh());
                         yljlb2.setZlsj(infoYljlb.getZlsj());
-                        if(infoYljlb.getTz()==null){
+                        if (infoYljlb.getTz() == null) {
                             yljlb2.setTz("");
-                        }else {
+                        } else {
                             yljlb2.setTz(infoYljlb.getTz());
                         }
                         yljlb2.setZlys(infoYljlb.getZlys());
@@ -1328,31 +1332,31 @@ public class PersonSynchronization {
                         yljlb2.setXy(infoYljlb.getXy());
                         yljlb2.setXl(infoYljlb.getXl());
                         yljlb2.setTw(infoYljlb.getTw());
-                        if(infoYljlb.getYz()==null){
+                        if (infoYljlb.getYz() == null) {
                             yljlb2.setYz("");
-                        }else {
+                        } else {
                             yljlb2.setYz(infoYljlb.getYz());
                         }
-                        if(infoYljlb.getBz()==null){
+                        if (infoYljlb.getBz() == null) {
                             yljlb2.setBz("");
-                        }else {
+                        } else {
                             yljlb2.setBz(infoYljlb.getBz());
                         }
-                        if(infoYljlb.getZs()==null){
+                        if (infoYljlb.getZs() == null) {
                             yljlb2.setZs("");
-                        }else {
+                        } else {
                             yljlb2.setZs(infoYljlb.getZs());
                         }
 
-                        if(infoYljlb.getZd()==null){
+                        if (infoYljlb.getZd() == null) {
                             yljlb2.setZd("");
-                        }else {
+                        } else {
                             yljlb2.setZd(infoYljlb.getZd());
                         }
                         yljlb2.setFyksrq(infoYljlb.getFyksrq());
-                        if(infoYljlb.getFyksrq()==null){
+                        if (infoYljlb.getFyksrq() == null) {
                             yljlb2.setRyjsrq(djrq);
-                        }else {
+                        } else {
                             yljlb2.setRyjsrq(infoYljlb.getRyjsrq());
                         }
                         yljlb2.setYm(infoYljlb.getYm());
@@ -1365,19 +1369,19 @@ public class PersonSynchronization {
                         yljlb2.setCzsjc(infoYljlb.getCzsjc());
                         yljlb2.setSybjl(infoYljlb.getSybjl());
                         actualService.insActualSnyl(yljlb2);
-                        System.out.println("新增:"+infoYljlb.getRybh());
-                    }else {
-                        System.out.println("去重:"+infoYljlb.getRybh());
+                        System.out.println("新增:" + infoYljlb.getRybh());
+                    } else {
+                        System.out.println("去重:" + infoYljlb.getRybh());
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     //所内医疗 常熟-实战
-    public void csAndActualSnyl(String yl){
+    public void csAndActualSnyl(String yl) {
         List<SYljlb> listCSSnyl = detentionCSService.getCSYljib(yl);
         for (int j = 0; j < listCSSnyl.size(); j++) {
             SYljlb csYljlb = listCSSnyl.get(j);
@@ -1388,7 +1392,7 @@ public class PersonSynchronization {
             yljlb1.setZlys(csYljlb.getZlys());
             yljlb1.setJsbh("320581111");
             List<YljlbKss> listActualYljibKss = actualService.getActualSnyl(yljlb1);
-            if(null == listActualYljibKss && listActualYljibKss.size()==0){
+            if (null == listActualYljibKss && listActualYljibKss.size() == 0) {
                 YljlbKss yljlb2 = new YljlbKss();
                 yljlb2.setRybh(csYljlb.getRybh());
                 yljlb2.setZlsj(csYljlb.getZlsj());
@@ -1419,7 +1423,7 @@ public class PersonSynchronization {
     }
 
     //所内医疗 太仓-实战
-    public void tcAndActualSnyl(String yl){
+    public void tcAndActualSnyl(String yl) {
         List<SYljlb> listTCSnyl = detentionTCService.getTCYljib(yl);
         for (int j = 0; j < listTCSnyl.size(); j++) {
             SYljlb tcYljlb = listTCSnyl.get(j);
@@ -1430,7 +1434,7 @@ public class PersonSynchronization {
             yljlb1.setZlys(tcYljlb.getZlys());
             yljlb1.setJsbh("320585111");
             List<YljlbKss> listActualYljibKss = actualService.getActualSnyl(yljlb1);
-            if(null == listActualYljibKss && listActualYljibKss.size()==0){
+            if (null == listActualYljibKss && listActualYljibKss.size() == 0) {
                 YljlbKss yljlb2 = new YljlbKss();
                 yljlb2.setRybh(tcYljlb.getRybh());
                 yljlb2.setZlsj(tcYljlb.getZlsj());
@@ -1461,7 +1465,7 @@ public class PersonSynchronization {
     }
 
     //所内医疗 吴江-实战
-    public void wjAndActualSnyl(String yl){
+    public void wjAndActualSnyl(String yl) {
         List<SYljlb> listWJSnyl = detentionWJService.getWJYljib(yl);
         for (int j = 0; j < listWJSnyl.size(); j++) {
             SYljlb wjYljlb = listWJSnyl.get(j);
@@ -1472,7 +1476,7 @@ public class PersonSynchronization {
             yljlb1.setZlys(wjYljlb.getZlys());
             yljlb1.setJsbh("320584111");
             List<YljlbKss> listActualYljibKss = actualService.getActualSnyl(yljlb1);
-            if(null == listActualYljibKss && listActualYljibKss.size()==0){
+            if (null == listActualYljibKss && listActualYljibKss.size() == 0) {
                 YljlbKss yljlb2 = new YljlbKss();
                 yljlb2.setRybh(wjYljlb.getRybh());
                 yljlb2.setZlsj(wjYljlb.getZlsj());
@@ -1503,7 +1507,7 @@ public class PersonSynchronization {
     }
 
     //所内医疗 张家港-实战
-    public void zjgAndActualSnyl(String yl){
+    public void zjgAndActualSnyl(String yl) {
         List<SYljlb> listZJGSnyl = detentionZJGService.getZJGYljib(yl);
         for (int j = 0; j < listZJGSnyl.size(); j++) {
             SYljlb zjgYljlb = listZJGSnyl.get(j);
@@ -1514,7 +1518,7 @@ public class PersonSynchronization {
             yljlb1.setZlys(zjgYljlb.getZlys());
             yljlb1.setJsbh("320582111");
             List<YljlbKss> listActualYljibKss = actualService.getActualSnyl(yljlb1);
-            if(null == listActualYljibKss && listActualYljibKss.size()==0){
+            if (null == listActualYljibKss && listActualYljibKss.size() == 0) {
                 YljlbKss yljlb2 = new YljlbKss();
                 yljlb2.setRybh(zjgYljlb.getRybh());
                 yljlb2.setZlsj(zjgYljlb.getZlsj());
@@ -1545,7 +1549,7 @@ public class PersonSynchronization {
     }
 
     //所内医疗 昆山-实战
-    public void ksAndActualSnyl(String yl){
+    public void ksAndActualSnyl(String yl) {
         List<SYljlb> listKSSnyl = detentionKSService.getKSYljib(yl);
         for (int j = 0; j < listKSSnyl.size(); j++) {
             SYljlb ksYljlb = listKSSnyl.get(j);
@@ -1556,7 +1560,7 @@ public class PersonSynchronization {
             yljlb1.setZlys(ksYljlb.getZlys());
             yljlb1.setJsbh("320583111");
             List<YljlbKss> listActualYljibKss = actualService.getActualSnyl(yljlb1);
-            if(null == listActualYljibKss && listActualYljibKss.size()==0){
+            if (null == listActualYljibKss && listActualYljibKss.size() == 0) {
                 YljlbKss yljlb2 = new YljlbKss();
                 yljlb2.setRybh(ksYljlb.getRybh());
                 yljlb2.setZlsj(ksYljlb.getZlsj());
@@ -1587,16 +1591,16 @@ public class PersonSynchronization {
     }
 
     //提押 信息-实战
-    public  void infoAndActualTy(String ty){
-        String [] str = new String[4];
+    public void infoAndActualTy(String ty) {
+        String[] str = new String[4];
         str[0] = "320500111";
         str[1] = "320500112";
         str[2] = "320500113";
         str[3] = "320500114";
         for (int i = 0; i < str.length; i++) {
-            List<Tjcsdj> listInfoTjcsdj = infoService.getInfoTjcsdj(str[i],ty);
+            List<Tjcsdj> listInfoTjcsdj = infoService.getInfoTjcsdj(str[i], ty);
             for (int j = 0; j < listInfoTjcsdj.size(); j++) {
-                try{
+                try {
                     Tjcsdj infoTjcsdj = listInfoTjcsdj.get(j);
                     SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
                     Date djrq = null;
@@ -1607,9 +1611,9 @@ public class PersonSynchronization {
                         e.printStackTrace();
                     }
                     TjcsdjKss actualTjcsdj1 = new TjcsdjKss();
-                    if(infoTjcsdj.getDjrq() == null){
+                    if (infoTjcsdj.getDjrq() == null) {
                         actualTjcsdj1.setDjrq(djrq);
-                    }else {
+                    } else {
                         actualTjcsdj1.setDjrq(infoTjcsdj.getDjrq());
                     }
                     actualTjcsdj1.setRybh(infoTjcsdj.getRybh());
@@ -1620,7 +1624,7 @@ public class PersonSynchronization {
                     actualTjcsdj1.setJsbh(infoTjcsdj.getZyjsbh());
                     actualTjcsdj1.setCbr(infoTjcsdj.getCbr());
                     List<TjcsdjKss> list = actualService.getActualTy(actualTjcsdj1);
-                    if (null == list || list.size()==0){
+                    if (null == list || list.size() == 0) {
                         TjcsdjKss actualTjcsdj2 = new TjcsdjKss();
                         actualTjcsdj2.setZybh(infoTjcsdj.getZybh());
                         actualTjcsdj2.setRybh(infoTjcsdj.getRybh());
@@ -1628,9 +1632,9 @@ public class PersonSynchronization {
                         actualTjcsdj2.setHssj(infoTjcsdj.getHssj());
                         actualTjcsdj2.setCbdw(infoTjcsdj.getCbdw());
                         actualTjcsdj2.setCbr(infoTjcsdj.getCbr());
-                        if(infoTjcsdj.getDjrq() == null){
+                        if (infoTjcsdj.getDjrq() == null) {
                             actualTjcsdj2.setDjrq(djrq);
-                        }else {
+                        } else {
                             actualTjcsdj2.setDjrq(infoTjcsdj.getDjrq());
                         }
                         actualTjcsdj2.setSsjd(infoTjcsdj.getSsjd());
@@ -1638,19 +1642,19 @@ public class PersonSynchronization {
                         actualTjcsdj2.setPzr(infoTjcsdj.getPzr());
                         actualTjcsdj2.setTcry(infoTjcsdj.getTcry());
                         actualTjcsdj2.setThry(infoTjcsdj.getThry());
-                        if(infoTjcsdj.getBz()==null){
+                        if (infoTjcsdj.getBz() == null) {
                             actualTjcsdj2.setBz("");
-                        }else {
+                        } else {
                             actualTjcsdj2.setBz(infoTjcsdj.getBz());
                         }
                         actualTjcsdj2.setCzsjc(infoTjcsdj.getCzsjc());
                         actualTjcsdj2.setJsbh(infoTjcsdj.getZyjsbh());
                         actualService.insActualTy(actualTjcsdj2);
-                        System.out.println("提押新增:"+infoTjcsdj.getRybh());
-                    }else {
-                        System.out.println("提押去重:"+infoTjcsdj.getRybh());
+                        System.out.println("提押新增:" + infoTjcsdj.getRybh());
+                    } else {
+                        System.out.println("提押去重:" + infoTjcsdj.getRybh());
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -1658,7 +1662,7 @@ public class PersonSynchronization {
     }
 
     //提押 常熟-实战
-    public void csAndActualTy(String ty){
+    public void csAndActualTy(String ty) {
         List<STjcsdj> listCSTjcsdj = detentionCSService.getCSTjcsdj(ty);
         for (int i = 0; i < listCSTjcsdj.size(); i++) {
             String infoRybh = listCSTjcsdj.get(i).getRybh();
@@ -1670,7 +1674,7 @@ public class PersonSynchronization {
             actualTjcsdj1.setCbdw(infoTjcsdj.getCbdw());
             actualTjcsdj1.setCbr(infoTjcsdj.getCbr());
             List<TjcsdjKss> list = actualService.getActualTy(actualTjcsdj1);
-            if (null == list || list.size()==0){
+            if (null == list || list.size() == 0) {
                 TjcsdjKss actualTjcsdj2 = new TjcsdjKss();
                 actualTjcsdj2.setZybh(infoTjcsdj.getZybh());
                 actualTjcsdj2.setRybh(infoTjcsdj.getRybh());
@@ -1684,9 +1688,9 @@ public class PersonSynchronization {
                 actualTjcsdj2.setPzr(infoTjcsdj.getPzr());
                 actualTjcsdj2.setTcry(infoTjcsdj.getTcry());
                 actualTjcsdj2.setThry(infoTjcsdj.getThry());
-                if(infoTjcsdj.getBz()==null){
+                if (infoTjcsdj.getBz() == null) {
                     actualTjcsdj2.setBz("320581111");
-                }else {
+                } else {
                     actualTjcsdj2.setBz(infoTjcsdj.getBz());
                 }
                 actualTjcsdj2.setCzsjc(infoTjcsdj.getCzsjc());
@@ -1698,7 +1702,7 @@ public class PersonSynchronization {
     }
 
     //提押 太仓-实战
-    public void tcAndActualTy(String ty){
+    public void tcAndActualTy(String ty) {
         List<STjcsdj> listTCTjcsdj = detentionTCService.getTCTjcsdj(ty);
         for (int i = 0; i < listTCTjcsdj.size(); i++) {
             String infoRybh = listTCTjcsdj.get(i).getRybh();
@@ -1710,7 +1714,7 @@ public class PersonSynchronization {
             actualTjcsdj1.setCbdw(infoTjcsdj.getCbdw());
             actualTjcsdj1.setCbr(infoTjcsdj.getCbr());
             List<TjcsdjKss> list = actualService.getActualTy(actualTjcsdj1);
-            if (null == list || list.size()==0){
+            if (null == list || list.size() == 0) {
                 TjcsdjKss actualTjcsdj2 = new TjcsdjKss();
                 actualTjcsdj2.setZybh(infoTjcsdj.getZybh());
                 actualTjcsdj2.setRybh(infoTjcsdj.getRybh());
@@ -1724,9 +1728,9 @@ public class PersonSynchronization {
                 actualTjcsdj2.setPzr(infoTjcsdj.getPzr());
                 actualTjcsdj2.setTcry(infoTjcsdj.getTcry());
                 actualTjcsdj2.setThry(infoTjcsdj.getThry());
-                if(infoTjcsdj.getBz()==null){
+                if (infoTjcsdj.getBz() == null) {
                     actualTjcsdj2.setBz("");
-                }else {
+                } else {
                     actualTjcsdj2.setBz(infoTjcsdj.getBz());
                 }
                 actualTjcsdj2.setCzsjc(infoTjcsdj.getCzsjc());
@@ -1738,7 +1742,7 @@ public class PersonSynchronization {
     }
 
     //提押 吴江-实战
-    public void wjAndActualTy(String ty){
+    public void wjAndActualTy(String ty) {
         List<STjcsdj> listWJTjcsdj = detentionWJService.getWJTjcsdj(ty);
         for (int i = 0; i < listWJTjcsdj.size(); i++) {
             String infoRybh = listWJTjcsdj.get(i).getRybh();
@@ -1750,7 +1754,7 @@ public class PersonSynchronization {
             actualTjcsdj1.setCbdw(infoTjcsdj.getCbdw());
             actualTjcsdj1.setCbr(infoTjcsdj.getCbr());
             List<TjcsdjKss> list = actualService.getActualTy(actualTjcsdj1);
-            if (null == list || list.size()==0){
+            if (null == list || list.size() == 0) {
                 TjcsdjKss actualTjcsdj2 = new TjcsdjKss();
                 actualTjcsdj2.setZybh(infoTjcsdj.getZybh());
                 actualTjcsdj2.setRybh(infoTjcsdj.getRybh());
@@ -1764,9 +1768,9 @@ public class PersonSynchronization {
                 actualTjcsdj2.setPzr(infoTjcsdj.getPzr());
                 actualTjcsdj2.setTcry(infoTjcsdj.getTcry());
                 actualTjcsdj2.setThry(infoTjcsdj.getThry());
-                if(infoTjcsdj.getBz()==null){
+                if (infoTjcsdj.getBz() == null) {
                     actualTjcsdj2.setBz("");
-                }else {
+                } else {
                     actualTjcsdj2.setBz(infoTjcsdj.getBz());
                 }
                 actualTjcsdj2.setCzsjc(infoTjcsdj.getCzsjc());
@@ -1777,7 +1781,7 @@ public class PersonSynchronization {
     }
 
     //提押 张家港-实战
-    public void zjgAndActualTy(String ty){
+    public void zjgAndActualTy(String ty) {
         List<STjcsdj> listZJGTjcsdj = detentionZJGService.getZJGTjcsdj(ty);
         for (int i = 0; i < listZJGTjcsdj.size(); i++) {
             String infoRybh = listZJGTjcsdj.get(i).getRybh();
@@ -1789,7 +1793,7 @@ public class PersonSynchronization {
             actualTjcsdj1.setCbdw(infoTjcsdj.getCbdw());
             actualTjcsdj1.setCbr(infoTjcsdj.getCbr());
             List<TjcsdjKss> list = actualService.getActualTy(actualTjcsdj1);
-            if (null == list || list.size()==0){
+            if (null == list || list.size() == 0) {
                 TjcsdjKss actualTjcsdj2 = new TjcsdjKss();
                 actualTjcsdj2.setZybh(infoTjcsdj.getZybh());
                 actualTjcsdj2.setRybh(infoTjcsdj.getRybh());
@@ -1803,9 +1807,9 @@ public class PersonSynchronization {
                 actualTjcsdj2.setPzr(infoTjcsdj.getPzr());
                 actualTjcsdj2.setTcry(infoTjcsdj.getTcry());
                 actualTjcsdj2.setThry(infoTjcsdj.getThry());
-                if(infoTjcsdj.getBz()==null){
+                if (infoTjcsdj.getBz() == null) {
                     actualTjcsdj2.setBz("");
-                }else {
+                } else {
                     actualTjcsdj2.setBz(infoTjcsdj.getBz());
                 }
                 actualTjcsdj2.setCzsjc(infoTjcsdj.getCzsjc());
@@ -1816,7 +1820,7 @@ public class PersonSynchronization {
     }
 
     //提押 昆山-实战
-    public void ksAndActualTy(String ty){
+    public void ksAndActualTy(String ty) {
         List<STjcsdj> listKSTjcsdj = detentionKSService.getKSTjcsdj(ty);
         for (int i = 0; i < listKSTjcsdj.size(); i++) {
             String infoRybh = listKSTjcsdj.get(i).getRybh();
@@ -1828,7 +1832,7 @@ public class PersonSynchronization {
             actualTjcsdj1.setCbdw(infoTjcsdj.getCbdw());
             actualTjcsdj1.setCbr(infoTjcsdj.getCbr());
             List<TjcsdjKss> list = actualService.getActualTy(actualTjcsdj1);
-            if (null == list || list.size()==0){
+            if (null == list || list.size() == 0) {
                 TjcsdjKss actualTjcsdj2 = new TjcsdjKss();
                 actualTjcsdj2.setZybh(infoTjcsdj.getZybh());
                 actualTjcsdj2.setRybh(infoTjcsdj.getRybh());
@@ -1842,9 +1846,9 @@ public class PersonSynchronization {
                 actualTjcsdj2.setPzr(infoTjcsdj.getPzr());
                 actualTjcsdj2.setTcry(infoTjcsdj.getTcry());
                 actualTjcsdj2.setThry(infoTjcsdj.getThry());
-                if(infoTjcsdj.getBz()==null){
+                if (infoTjcsdj.getBz() == null) {
                     actualTjcsdj2.setBz("");
-                }else {
+                } else {
                     actualTjcsdj2.setBz(infoTjcsdj.getBz());
                 }
                 actualTjcsdj2.setCzsjc(infoTjcsdj.getCzsjc());
@@ -1856,8 +1860,8 @@ public class PersonSynchronization {
 
 
     //提审
-    public void  infoAndActualTx(String tx){
-        String [] str = new String[4];
+    public void infoAndActualTx(String tx) {
+        String[] str = new String[4];
         str[0] = "320500111";
         str[1] = "320500112";
         str[2] = "320500113";
@@ -1872,9 +1876,9 @@ public class PersonSynchronization {
         }
         for (int i = 0; i < str.length; i++) {
             try {
-                List<Txxxb> infoTxxxb = infoService.getInfoTxxxb(str[i],tx);
-                System.out.println(str[i]+":"+infoTxxxb.size());
-                for (Txxxb infoTx: infoTxxxb) {
+                List<Txxxb> infoTxxxb = infoService.getInfoTxxxb(str[i], tx);
+                System.out.println(str[i] + ":" + infoTxxxb.size());
+                for (Txxxb infoTx : infoTxxxb) {
                     TxxxbKss txxxbKss1 = new TxxxbKss();
                     txxxbKss1.setRybh(infoTx.getRybh());
                     if (infoTx.getBadw() == null) {
@@ -1903,6 +1907,7 @@ public class PersonSynchronization {
                     }
                     txxxbKss1.setJsbh(infoTx.getZyjsbh());
                     List<TxxxbKss> list = actualService.getActualTx(txxxbKss1);
+//                    List<TxxxbKss>  list=new ArrayList<>();
                     if (null == list || list.size() == 0) {
                         TxxxbKss txxxbKss2 = new TxxxbKss();
                         txxxbKss2.setZybh(infoTx.getZybh());
@@ -1947,9 +1952,9 @@ public class PersonSynchronization {
                         txxxbKss2.setSybjl(infoTx.getSybjl());
                         txxxbKss2.setFaccode(infoTx.getFaccode());
                         txxxbKss2.setWjqrcssj(infoTx.getWjqrcssj());
-                        if(infoTx.getWjqrhssj()==null){
+                        if (infoTx.getWjqrhssj() == null) {
                             txxxbKss2.setWjqrhssj(rq);
-                        }else {
+                        } else {
                             txxxbKss2.setWjqrhssj(infoTx.getWjqrhssj());
                         }
 
@@ -1960,15 +1965,31 @@ public class PersonSynchronization {
                         txxxbKss2.setThryid(infoTx.getThryid());
                         txxxbKss2.setJdmjid(infoTx.getJdmjid());
                         txxxbKss2.setJsxbh(infoTx.getJsxbh());
-                        actualService.insActualTx(txxxbKss2);
-                        System.out.println("提审新增:"+infoTx.getRybh());
-                    }else {
-                        System.out.println("提审去重:"+infoTx.getRybh());
+                        if (txxxbKss2.getSybjl() != null && txxxbKss2.getSybjl().getYear() < 0) {
+                            txxxbKss2.setSybjl(rq);
+                        }
+                        if (txxxbKss2.getSybjl() != null && txxxbKss2.getSzqzrq().getYear() < 0) {
+                            txxxbKss2.setSzqzrq(rq);
+                        }
+                        infoAndActualTxAdd(txxxbKss2);
+                        System.out.println("提审新增:" + infoTx.getRybh());
+                    } else {
+                        System.out.println("提审去重:" + infoTx.getRybh());
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    public void infoAndActualTxAdd(TxxxbKss txxxbKss2) {
+        try {
+            actualService.insActualTx(txxxbKss2);
+
+        } catch (Exception ex) {
+            System.out.println("提审新增ERR:" + txxxbKss2.getRybh());
+        }
+    }
+
 }
