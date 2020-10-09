@@ -73,8 +73,8 @@ public class PersonSynchronization {
     /**
      * 每20分钟执行一次
      */
-    //@Scheduled(cron = "0 */5 * * * ?")
-    @Scheduled(cron = "*/10 * * * * ?")
+    @Scheduled(cron = "0 */20 * * * ?")
+//    @Scheduled(cron = "*/10 * * * * ?")
     public void personBasicInfoSynchronization() {
 
         String hj = ConfigUtil.getConfig("HJ");
