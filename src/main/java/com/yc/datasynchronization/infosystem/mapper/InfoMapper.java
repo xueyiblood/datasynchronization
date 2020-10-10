@@ -50,7 +50,7 @@ public interface InfoMapper {
     List<Tjcsdj> getInfoTjcsdj(@Param("jsbh") String jsbh, @Param("ty") String ty);
 
     @Select({"<script>",
-            "select * from TXXXB_KSS where zyjsbh = #{jsbh} and txjssj is not null ORDER BY rybh desc",
+            "select * from TXXXB_KSS where zyjsbh = #{jsbh} and txjssj is not null  ",
             "<if test = 'tx == 0'>",
             "and txjssj > TO_DATE(to_char(SYSDATE-25/24/60,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
             "</if>",
