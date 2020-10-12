@@ -19,14 +19,13 @@ import com.yc.datasynchronization.detentionhouse2.service.Detention2Service;
 import com.yc.datasynchronization.detentionhouse3.service.Detention3Service;
 import com.yc.datasynchronization.detentionhouse4.service.Detention4Service;
 import com.yc.datasynchronization.infosystem.service.InfoService;
-import com.yc.datasynchronization.util.ConfigUtil;
+import com.yc.datasynchronization.job.xxtoac.xxtoacMain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,26 +69,34 @@ public class PersonSynchronization {
     @Autowired
     private DetentionZJGService detentionZJGService;
 
+    @Autowired
+    public xxtoacMain xxtoacMain;
+
     /**
      * 每20分钟执行一次
      */
-    @Scheduled(cron = "0 */20 * * * ?")
-//    @Scheduled(cron = "*/10 * * * * ?")
+//    @Scheduled(cron = "0 */20 * * * ?")
+    @Scheduled(cron = "*/10 * * * * ?")
     public void personBasicInfoSynchronization() {
 
-        String hj = ConfigUtil.getConfig("HJ");
-        //String rq = ConfigUtil.getConfig("RQ");
-        String yl = ConfigUtil.getConfig("YL");
-        String ty = ConfigUtil.getConfig("TY");
-        String tx = ConfigUtil.getConfig("TX");
-        infoAndActualTy(ty);
-        System.out.println("提押成功");
-        infoAndActualLshj(hj);
-        System.out.println("律师会见成功");
+        xxtoacMain.doMain();
+//        String hj = ConfigUtil.getConfig("HJ");
+//        //String rq = ConfigUtil.getConfig("RQ");
+//        String yl = ConfigUtil.getConfig("YL");
+//        String ty = ConfigUtil.getConfig("TY");
+//        String tx = ConfigUtil.getConfig("TX");
+//        System.out.println("----------提押开始----------");
+//        infoAndActualTy(ty);
+//        System.out.println("----------提押结束----------");
+//        System.out.println("--------律师会见开始---------");
+//        infoAndActualLshj(hj);
+//        System.out.println("--------律师会见结束---------");
+//        System.out.println("--------提审开始---------");
+//        infoAndActualTx(tx);
+//        System.out.println("--------提审结束---------");
+
 //        infoAndActualSnyl(yl);
 //        System.out.println("所内医疗全量成功");
-        infoAndActualTx(tx);
-        System.out.println("提审成功");
 
     }
 
@@ -845,115 +852,6 @@ public class PersonSynchronization {
         }
     }
 
-    //律师会见 信息-实战
-    public void infoAndActualLshj(String hj) {
-        String[] str = new String[4];
-        str[0] = "320500111";
-        str[1] = "320500112";
-        str[2] = "320500113";
-        str[3] = "320500114";
-        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
-        Date djrq = null;
-        try {
-            djrq = s.parse("1900-01-01 00:00:00");
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < str.length; i++) {
-            try {
-
-                List<Lshjxx> listInfoLshj = infoService.getInfoLshjxxb(str[i], hj);
-                System.out.println(i + "看");
-                for (int j = 0; j < listInfoLshj.size(); j++) {
-                    Lshjxx infoLshjxx = listInfoLshj.get(j);
-                    LshjxxbKss actualLshjxx1 = new LshjxxbKss();
-                    actualLshjxx1.setRybh(infoLshjxx.getRybh());
-                    actualLshjxx1.setHjkssj(infoLshjxx.getHjkssj());
-                    actualLshjxx1.setHjjssj(infoLshjxx.getHjjssj());
-                    if (infoLshjxx.getLsdw() == null) {
-                        actualLshjxx1.setLsdw("");
-                    } else {
-                        actualLshjxx1.setLsdw(infoLshjxx.getLsdw());
-                    }
-                    actualLshjxx1.setJsbh(infoLshjxx.getZyjsbh());
-                    if (infoLshjxx.getTcry() == null) {
-                        actualLshjxx1.setTcry("");
-                    } else {
-                        actualLshjxx1.setTcry(infoLshjxx.getTcry());
-                    }
-                    if (infoLshjxx.getThry() == null) {
-                        actualLshjxx1.setThry("");
-                    } else {
-                        actualLshjxx1.setThry(infoLshjxx.getThry());
-                    }
-                    actualLshjxx1.setCzsjc(infoLshjxx.getCzsjc());
-                    if (infoLshjxx.getLsxm() == null) {
-                        actualLshjxx1.setLsxm("");
-                    } else {
-                        actualLshjxx1.setLsxm(infoLshjxx.getLsxm());
-                    }
-                    List<LshjxxbKss> listActualLshjxx = actualService.getActualLshj(actualLshjxx1);
-                    if (null == listActualLshjxx || listActualLshjxx.size() == 0) {
-                        LshjxxbKss actualLshjxx2 = new LshjxxbKss();
-                        actualLshjxx2.setZybh(infoLshjxx.getZybh());
-                        actualLshjxx2.setRybh(infoLshjxx.getRybh());
-                        if (infoLshjxx.getLsxm() == null) {
-                            actualLshjxx2.setLsxm("");
-                        } else {
-                            actualLshjxx2.setLsxm(infoLshjxx.getLsxm());
-                        }
-                        actualLshjxx2.setLszjh(infoLshjxx.getLszjh());
-                        actualLshjxx2.setRs(infoLshjxx.getRs());
-                        actualLshjxx2.setPzr(infoLshjxx.getPzr());
-                        actualLshjxx2.setGznr(infoLshjxx.getGznr());
-                        actualLshjxx2.setHjs(infoLshjxx.getHjs());
-                        if (infoLshjxx.getTcry() == null) {
-                            actualLshjxx2.setTcry("");
-                        } else {
-                            actualLshjxx2.setTcry(infoLshjxx.getTcry());
-                        }
-                        if (infoLshjxx.getThry() == null) {
-                            actualLshjxx2.setThry("");
-                        } else {
-                            actualLshjxx2.setThry(infoLshjxx.getThry());
-                        }
-                        actualLshjxx2.setJdmj(infoLshjxx.getJdmj());
-                        actualLshjxx2.setHjkssj(infoLshjxx.getHjkssj());
-                        actualLshjxx2.setHjjssj(infoLshjxx.getHjjssj());
-                        if (infoLshjxx.getLsdw() == null) {
-                            actualLshjxx2.setLsdw("");
-                        } else {
-                            actualLshjxx2.setLsdw(infoLshjxx.getLsdw());
-                        }
-                        if (infoLshjxx.getWtr() == null) {
-                            actualLshjxx2.setWtr("");
-                        } else {
-                            actualLshjxx2.setWtr(infoLshjxx.getWtr());
-                        }
-                        actualLshjxx2.setFaccode(infoLshjxx.getFaccode());
-                        if (infoLshjxx.getWjqrcssj() == null) {
-                            actualLshjxx2.setWjqrcssj(djrq);
-                        } else {
-                            actualLshjxx2.setWjqrcssj(infoLshjxx.getWjqrcssj());
-                        }
-                        actualLshjxx2.setWjqrhssj(infoLshjxx.getWjqrhssj());
-                        actualLshjxx2.setDcry(infoLshjxx.getDcry());
-                        actualLshjxx2.setDhry(infoLshjxx.getDhry());
-                        actualLshjxx2.setCzsjc(infoLshjxx.getCzsjc());
-                        actualLshjxx2.setJsbh(infoLshjxx.getZyjsbh());
-                        actualLshjxx2.setSybjl(infoLshjxx.getSybjl());
-                        actualService.insActualLshj(actualLshjxx2);
-                        System.out.println("律师新增:" + infoLshjxx.getRybh());
-                    } else {
-                        System.out.println("律师去重:" + infoLshjxx.getRybh());
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     //律师会见 常熟-实战
     public void csAndActualLshj1(String hj) {
@@ -1165,6 +1063,7 @@ public class PersonSynchronization {
         }
     }
 
+
     //入所日期 信息 - 实战
     public void infoAndActualRsrq() {
 //        for (int i = 1; i <= 4 ; i++) {
@@ -1191,7 +1090,6 @@ public class PersonSynchronization {
 
 
     }
-
 
     //入所日期 常熟-实战
     public void csAndActualRsrq() {
@@ -1590,6 +1488,7 @@ public class PersonSynchronization {
         }
     }
 
+
     //提押 信息-实战
     public void infoAndActualTy(String ty) {
         String[] str = new String[4];
@@ -1859,137 +1758,6 @@ public class PersonSynchronization {
     }
 
 
-    //提审
-    public void infoAndActualTx(String tx) {
-        String[] str = new String[4];
-        str[0] = "320500111";
-        str[1] = "320500112";
-        str[2] = "320500113";
-        str[3] = "320500114";
-        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
-        Date rq = null;
-        try {
-            rq = s.parse("1900-01-01 00:00:00");
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < str.length; i++) {
-            try {
-                List<Txxxb> infoTxxxb = infoService.getInfoTxxxb(str[i], tx);
-                System.out.println(str[i] + ":" + infoTxxxb.size());
-                for (Txxxb infoTx : infoTxxxb) {
-                    TxxxbKss txxxbKss1 = new TxxxbKss();
-                    txxxbKss1.setRybh(infoTx.getRybh());
-                    if (infoTx.getBadw() == null) {
-                        txxxbKss1.setBadw("");
-                    } else {
-                        txxxbKss1.setBadw(infoTx.getBadw());
-                    }
-
-                    if (infoTx.getBar() == null) {
-                        txxxbKss1.setBar("");
-                    } else {
-                        txxxbKss1.setBar(infoTx.getBar());
-                    }
-
-                    if (infoTx.getDebar() == null) {
-                        txxxbKss1.setDebar("");
-                    } else {
-                        txxxbKss1.setDebar(infoTx.getDebar());
-                    }
-                    txxxbKss1.setTxkssj(infoTx.getTxkssj());
-                    txxxbKss1.setTxjssj(infoTx.getTxjssj());
-                    if (infoTx.getCzsjc() == null) {
-                        txxxbKss1.setCzsjc("");
-                    } else {
-                        txxxbKss1.setCzsjc(infoTx.getCzsjc());
-                    }
-                    txxxbKss1.setJsbh(infoTx.getZyjsbh());
-                    List<TxxxbKss> list = actualService.getActualTx(txxxbKss1);
-//                    List<TxxxbKss>  list=new ArrayList<>();
-                    if (null == list || list.size() == 0) {
-                        TxxxbKss txxxbKss2 = new TxxxbKss();
-                        txxxbKss2.setZybh(infoTx.getZybh());
-                        txxxbKss2.setRybh(infoTx.getRybh());
-                        if (infoTx.getBadw() == null) {
-                            txxxbKss2.setBadw("");
-                        } else {
-                            txxxbKss2.setBadw(infoTx.getBadw());
-                        }
-
-                        if (infoTx.getBar() == null) {
-                            txxxbKss2.setBar("");
-                        } else {
-                            txxxbKss2.setBar(infoTx.getBar());
-                        }
-
-                        if (infoTx.getDebar() == null) {
-                            txxxbKss2.setDebar("");
-                        } else {
-                            txxxbKss2.setDebar(infoTx.getDebar());
-                        }
-                        txxxbKss2.setTxkssj(infoTx.getTxkssj());
-                        txxxbKss2.setTxjssj(infoTx.getTxjssj());
-                        if (infoTx.getCzsjc() == null) {
-                            txxxbKss2.setCzsjc("");
-                        } else {
-                            txxxbKss2.setCzsjc(infoTx.getCzsjc());
-                        }
-                        txxxbKss2.setJsbh(infoTx.getZyjsbh());
-                        txxxbKss2.setBz(infoTx.getBz());
-                        txxxbKss2.setDcry(infoTx.getDcry());
-                        txxxbKss2.setDhry(infoTx.getDhry());
-                        txxxbKss2.setJdmj(infoTx.getJdmj());
-                        txxxbKss2.setZjhm(infoTx.getZjhm());
-                        txxxbKss2.setSz(infoTx.getSz());
-                        txxxbKss2.setSzqzrq(infoTx.getSzqzrq());
-                        txxxbKss2.setSzyj(infoTx.getSzyj());
-                        txxxbKss2.setTcry(infoTx.getTcry());
-                        txxxbKss2.setThry(infoTx.getThry());
-                        txxxbKss2.setTcryid(infoTx.getTcryid());
-                        txxxbKss2.setThryid(infoTx.getThryid());
-                        txxxbKss2.setSybjl(infoTx.getSybjl());
-                        txxxbKss2.setFaccode(infoTx.getFaccode());
-                        txxxbKss2.setWjqrcssj(infoTx.getWjqrcssj());
-                        if (infoTx.getWjqrhssj() == null) {
-                            txxxbKss2.setWjqrhssj(rq);
-                        } else {
-                            txxxbKss2.setWjqrhssj(infoTx.getWjqrhssj());
-                        }
-
-                        txxxbKss2.setTxdd(infoTx.getTxdd());
-                        txxxbKss2.setXway(infoTx.getXway());
-                        txxxbKss2.setDebarzj(infoTx.getDebarzj());
-                        txxxbKss2.setTcryid(infoTx.getTcryid());
-                        txxxbKss2.setThryid(infoTx.getThryid());
-                        txxxbKss2.setJdmjid(infoTx.getJdmjid());
-                        txxxbKss2.setJsxbh(infoTx.getJsxbh());
-                        if (txxxbKss2.getSybjl() != null && txxxbKss2.getSybjl().getYear() < 0) {
-                            txxxbKss2.setSybjl(rq);
-                        }
-                        if (txxxbKss2.getSybjl() != null && txxxbKss2.getSzqzrq().getYear() < 0) {
-                            txxxbKss2.setSzqzrq(rq);
-                        }
-                        infoAndActualTxAdd(txxxbKss2);
-                        System.out.println("提审新增:" + infoTx.getRybh());
-                    } else {
-                        System.out.println("提审去重:" + infoTx.getRybh());
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void infoAndActualTxAdd(TxxxbKss txxxbKss2) {
-        try {
-            actualService.insActualTx(txxxbKss2);
-
-        } catch (Exception ex) {
-            System.out.println("提审新增ERR:" + txxxbKss2.getRybh());
-        }
-    }
 
 }
