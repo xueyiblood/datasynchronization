@@ -23,7 +23,7 @@ public interface InfoMapper {
 
     @Select({"<script>","select * from LSHJXXB_KSS where zyjsbh = #{jsbh} and hjjssj is not null",
             "<if test='key == 0'>",
-            "and hjjssj > TO_DATE(to_char(SYSDATE-25/24/60,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
+            "and hjjssj > TO_DATE(to_char(SYSDATE-1,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
             "</if>",
             "</script>"})
     List<Lshjxx> getInfoLshjxxb(@Param("jsbh") String jsbh, @Param("key") String key);
@@ -52,7 +52,7 @@ public interface InfoMapper {
     @Select({"<script>",
             "select * from TXXXB_KSS where zyjsbh = #{jsbh} and txjssj is not null  ",
             "<if test = 'tx == 0'>",
-            "and txjssj > TO_DATE(to_char(SYSDATE-25/24/60,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
+            "and txjssj > TO_DATE(to_char(SYSDATE-1,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
             "</if>",
             "</script>"})
     List<Txxxb> getInfoTxxxb(@Param("jsbh") String jsbh, @Param("tx") String tx);

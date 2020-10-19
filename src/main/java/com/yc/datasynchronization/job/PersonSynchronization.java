@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,9 +76,9 @@ public class PersonSynchronization {
     /**
      * 每20分钟执行一次
      */
-//    @Scheduled(cron = "0 */20 * * * ?")
-    @Scheduled(cron = "*/10 * * * * ?")
-    public void personBasicInfoSynchronization() {
+    @Scheduled(cron = "0 */20 * * * ?")
+//    @Scheduled(cron = "*/10 * * * * ?")
+    public void personBasicInfoSynchronization() throws IOException {
 
         //信息->实战
         xxtoacMain.doMain();

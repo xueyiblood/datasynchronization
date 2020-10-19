@@ -5,9 +5,11 @@ import com.yc.datasynchronization.service.actual.entity.TjcsdjKss;
 import com.yc.datasynchronization.service.actual.service.ActualService;
 import com.yc.datasynchronization.service.infosystem.entity.Lshjxx;
 import com.yc.datasynchronization.service.infosystem.service.InfoService;
+import com.yc.datasynchronization.util.TxtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +25,8 @@ public class XxLshj {
 
 
     //律师会见 信息-实战
-    public void infoAndActualLshj(String hj) {
+    public void infoAndActualLshj(String hj) throws IOException {
+        StringBuilder sb = new StringBuilder();
         String[] str = new String[4];
         str[0] = "320500111";
         str[1] = "320500112";
@@ -39,7 +42,6 @@ public class XxLshj {
         }
         for (int i = 0; i < str.length; i++) {
             try {
-
                 List<Lshjxx> listInfoLshj = infoService.getInfoLshjxxb(str[i], hj);
 //                System.out.println(i + "看");
                 for (int j = 0; j < listInfoLshj.size(); j++) {
@@ -121,15 +123,20 @@ public class XxLshj {
                         actualLshjxx2.setJsbh(infoLshjxx.getZyjsbh());
                         actualLshjxx2.setSybjl(infoLshjxx.getSybjl());
                         actualService.insActualLshj(actualLshjxx2);
+                        sb.append("律师新增:" + infoLshjxx.getRybh());
                         System.out.println("律师新增:" + infoLshjxx.getRybh());
                     } else {
                         System.out.println("律师去重:" + infoLshjxx.getRybh());
+                        sb.append("律师新增:" + infoLshjxx.getRybh());
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                sb.append(e.getMessage());
             }
         }
+        TxtHelper.log(sb.toString());
+
     }
 
 }
