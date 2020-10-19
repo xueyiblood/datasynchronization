@@ -44,7 +44,7 @@ public interface InfoMapper {
     @Select({"<script>",
             "select * from TJCSDJB_KSS where zyjsbh = #{jsbh} and hssj is not null",
             "<if test = 'ty == 0'>",
-            "and cssj > TO_DATE(to_char(SYSDATE-25/24/60,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
+            "and cssj > TO_DATE(to_char(SYSDATE-1,'yyyy-mm-dd HH24:MI:SS'),'yyyy-mm-dd hh24:mi:ss')",
             "</if>",
             "</script>"})
     List<Tjcsdj> getInfoTjcsdj(@Param("jsbh") String jsbh, @Param("ty") String ty);
