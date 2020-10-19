@@ -19,33 +19,33 @@ import javax.sql.DataSource;
  */
 
 /**
- * 二所数据库配置
+ * 四所数据库配置
  */
 @Configuration//注册到springboot容器
-@MapperScan(basePackages= {"com.yc.datasynchronization.detentionhouse2.mapper"},sqlSessionFactoryRef="detention2SqlSessionFactory")
+@MapperScan(basePackages= {"com.yc.datasynchronization.service.detentionhouse4.mapper"},sqlSessionFactoryRef="detention4SqlSessionFactory")
 public class DataSource4Config {
-	@Bean(name="detention2DataSource")//注入到这个容器
-	@ConfigurationProperties(prefix="spring.datasource.detention2")//表示取application.properties配置文件中的前缀
+	@Bean(name="detention4DataSource")//注入到这个容器
+	@ConfigurationProperties(prefix="spring.datasource.detention4")//表示取application.properties配置文件中的前缀
 	
 	public DataSource testDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
-	@Bean(name="detention2SqlSessionFactory")
+	@Bean(name="detention4SqlSessionFactory")
 
-	public SqlSessionFactory testSqlSessionFactory(@Qualifier("detention2DataSource") DataSource dataSource) throws Exception {
+	public SqlSessionFactory testSqlSessionFactory(@Qualifier("detention4DataSource") DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean bean=new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		return bean.getObject();
 	}
-	@Bean(name="detention2TransactionManager")//配置事务
+	@Bean(name="detention4TransactionManager")//配置事务
 	
-	public DataSourceTransactionManager testTransactionManager(@Qualifier("detention2DataSource") DataSource dataSource) {
+	public DataSourceTransactionManager testTransactionManager(@Qualifier("detention4DataSource") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
-	@Bean(name="detention2SqlSessionTemplate")
+	@Bean(name="detention4SqlSessionTemplate")
 	
-	public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("detention2SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+	public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("detention4SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 }

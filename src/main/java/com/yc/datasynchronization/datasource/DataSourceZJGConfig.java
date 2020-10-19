@@ -22,7 +22,7 @@ import javax.sql.DataSource;
  * 张家港数据库配置
  */
 @Configuration//注册到springboot容器
-@MapperScan(basePackages= {"com.yc.datasynchronization.detentionhousezjg.mapper"},sqlSessionFactoryRef="detentionZJGSqlSessionFactory")
+@MapperScan(basePackages= {"com.yc.datasynchronization.service.detentionhousezjg.mapper"},sqlSessionFactoryRef="detentionZJGSqlSessionFactory")
 public class DataSourceZJGConfig {
 	@Bean(name="detentionZJGDataSource")//注入到这个容器
 	@ConfigurationProperties(prefix="spring.datasource.detentionzjg")//表示取application.properties配置文件中的前缀

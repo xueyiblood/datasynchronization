@@ -1,25 +1,25 @@
 package com.yc.datasynchronization.job;
 
-import com.yc.datasynchronization.actual.entity.*;
-import com.yc.datasynchronization.actual.service.ActualService;
-import com.yc.datasynchronization.detentionhouse1.entity.SRybdxxb;
-import com.yc.datasynchronization.detentionhouse1.entity.SRyjbxxb;
-import com.yc.datasynchronization.detentionhouse1.entity.SZpb;
-import com.yc.datasynchronization.detentionhousecs.entity.SLshjxxb;
-import com.yc.datasynchronization.detentionhousecs.entity.STjcsdj;
-import com.yc.datasynchronization.detentionhousecs.entity.SYljlb;
-import com.yc.datasynchronization.detentionhousecs.service.DetentionCSService;
-import com.yc.datasynchronization.detentionhouseks.service.DetentionKSService;
-import com.yc.datasynchronization.detentionhousetc.service.DetentionTCService;
-import com.yc.datasynchronization.detentionhousewj.service.DetentionWJService;
-import com.yc.datasynchronization.detentionhousezjg.service.DetentionZJGService;
-import com.yc.datasynchronization.infosystem.entity.*;
-import com.yc.datasynchronization.detentionhouse1.service.DetentionService;
-import com.yc.datasynchronization.detentionhouse2.service.Detention2Service;
-import com.yc.datasynchronization.detentionhouse3.service.Detention3Service;
-import com.yc.datasynchronization.detentionhouse4.service.Detention4Service;
-import com.yc.datasynchronization.infosystem.service.InfoService;
-import com.yc.datasynchronization.job.xxtoac.xxtoacMain;
+import com.yc.datasynchronization.service.actual.entity.*;
+import com.yc.datasynchronization.service.actual.service.ActualService;
+import com.yc.datasynchronization.service.detentionhouse1.entity.SRybdxxb;
+import com.yc.datasynchronization.service.detentionhouse1.entity.SRyjbxxb;
+import com.yc.datasynchronization.service.detentionhouse1.entity.SZpb;
+import com.yc.datasynchronization.service.detentionhousecs.entity.SLshjxxb;
+import com.yc.datasynchronization.service.detentionhousecs.entity.STjcsdj;
+import com.yc.datasynchronization.service.detentionhousecs.entity.SYljlb;
+import com.yc.datasynchronization.service.detentionhousecs.service.DetentionCSService;
+import com.yc.datasynchronization.service.detentionhouseks.service.DetentionKSService;
+import com.yc.datasynchronization.service.detentionhousetc.service.DetentionTCService;
+import com.yc.datasynchronization.service.detentionhousewj.service.DetentionWJService;
+import com.yc.datasynchronization.service.detentionhousezjg.service.DetentionZJGService;
+import com.yc.datasynchronization.service.infosystem.entity.*;
+import com.yc.datasynchronization.service.detentionhouse1.service.DetentionService;
+import com.yc.datasynchronization.service.detentionhouse2.service.Detention2Service;
+import com.yc.datasynchronization.service.detentionhouse3.service.Detention3Service;
+import com.yc.datasynchronization.service.detentionhouse4.service.Detention4Service;
+import com.yc.datasynchronization.service.infosystem.service.InfoService;
+import com.yc.datasynchronization.job.xxtoac.XxZMain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -70,7 +70,7 @@ public class PersonSynchronization {
     private DetentionZJGService detentionZJGService;
 
     @Autowired
-    public xxtoacMain xxtoacMain;
+    public XxZMain xxtoacMain;
 
     /**
      * 每20分钟执行一次
@@ -79,6 +79,7 @@ public class PersonSynchronization {
     @Scheduled(cron = "*/10 * * * * ?")
     public void personBasicInfoSynchronization() {
 
+        //信息->实战
         xxtoacMain.doMain();
 //        String hj = ConfigUtil.getConfig("HJ");
 //        //String rq = ConfigUtil.getConfig("RQ");

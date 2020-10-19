@@ -1,9 +1,9 @@
 package com.yc.datasynchronization.job.xxtoac;
 
-import com.yc.datasynchronization.actual.entity.TjcsdjKss;
-import com.yc.datasynchronization.actual.service.ActualService;
-import com.yc.datasynchronization.infosystem.entity.Tjcsdj;
-import com.yc.datasynchronization.infosystem.service.InfoService;
+import com.yc.datasynchronization.service.actual.entity.TjcsdjKss;
+import com.yc.datasynchronization.service.actual.service.ActualService;
+import com.yc.datasynchronization.service.infosystem.entity.Tjcsdj;
+import com.yc.datasynchronization.service.infosystem.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +19,7 @@ public class XxTy {
 
     @Autowired
     private ActualService actualService;
+
     //提押 信息-实战
     public void infoAndActualTy(String ty) {
         String[] str = new String[4];

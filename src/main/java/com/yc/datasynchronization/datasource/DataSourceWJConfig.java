@@ -22,7 +22,7 @@ import javax.sql.DataSource;
  * 吴江数据库配置
  */
 @Configuration//注册到springboot容器
-@MapperScan(basePackages= {"com.yc.datasynchronization.detentionhousewj.mapper"},sqlSessionFactoryRef="detentionWJSqlSessionFactory")
+@MapperScan(basePackages= {"com.yc.datasynchronization.service.detentionhousewj.mapper"},sqlSessionFactoryRef="detentionWJSqlSessionFactory")
 public class DataSourceWJConfig {
 	@Bean(name="detentionWJDataSource")//注入到这个容器
 	@ConfigurationProperties(prefix="spring.datasource.detentionwj")//表示取application.properties配置文件中的前缀

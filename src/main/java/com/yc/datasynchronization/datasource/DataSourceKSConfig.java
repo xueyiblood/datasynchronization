@@ -22,7 +22,7 @@ import javax.sql.DataSource;
  * 昆山数据库配置
  */
 @Configuration//注册到springboot容器
-@MapperScan(basePackages= {"com.yc.datasynchronization.detentionhouseks.mapper"},sqlSessionFactoryRef="detentionKSSqlSessionFactory")
+@MapperScan(basePackages= {"com.yc.datasynchronization.service.detentionhouseks.mapper"},sqlSessionFactoryRef="detentionKSSqlSessionFactory")
 public class DataSourceKSConfig {
 	@Bean(name="detentionKSDataSource")//注入到这个容器
 	@ConfigurationProperties(prefix="spring.datasource.detentionks")//表示取application.properties配置文件中的前缀

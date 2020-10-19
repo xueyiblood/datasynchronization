@@ -22,7 +22,7 @@ import javax.sql.DataSource;
  * 太仓数据库配置
  */
 @Configuration//注册到springboot容器
-@MapperScan(basePackages= {"com.yc.datasynchronization.detentionhousetc.mapper"},sqlSessionFactoryRef="detentionTCSqlSessionFactory")
+@MapperScan(basePackages= {"com.yc.datasynchronization.service.detentionhousetc.mapper"},sqlSessionFactoryRef="detentionTCSqlSessionFactory")
 public class DataSourceTCConfig {
 	@Bean(name="detentionTCDataSource")//注入到这个容器
 	@ConfigurationProperties(prefix="spring.datasource.detentiontc")//表示取application.properties配置文件中的前缀

@@ -22,7 +22,7 @@ import javax.sql.DataSource;
  * 常熟数据库配置
  */
 @Configuration//注册到springboot容器
-@MapperScan(basePackages= {"com.yc.datasynchronization.detentionhousecs.mapper"},sqlSessionFactoryRef="detentionCSSqlSessionFactory")
+@MapperScan(basePackages= {"com.yc.datasynchronization.service.detentionhousecs.mapper"},sqlSessionFactoryRef="detentionCSSqlSessionFactory")
 public class DataSourceCSConfig {
 	@Bean(name="detentionCSDataSource")//注入到这个容器
 	@ConfigurationProperties(prefix="spring.datasource.detentioncs")//表示取application.properties配置文件中的前缀

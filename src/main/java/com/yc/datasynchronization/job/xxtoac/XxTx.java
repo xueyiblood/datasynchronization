@@ -1,9 +1,9 @@
 package com.yc.datasynchronization.job.xxtoac;
 
-import com.yc.datasynchronization.actual.entity.TxxxbKss;
-import com.yc.datasynchronization.actual.service.ActualService;
-import com.yc.datasynchronization.infosystem.entity.Txxxb;
-import com.yc.datasynchronization.infosystem.service.InfoService;
+import com.yc.datasynchronization.service.actual.entity.TxxxbKss;
+import com.yc.datasynchronization.service.actual.service.ActualService;
+import com.yc.datasynchronization.service.infosystem.entity.Txxxb;
+import com.yc.datasynchronization.service.infosystem.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
