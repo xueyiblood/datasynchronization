@@ -24,11 +24,11 @@ public class XxZMain {
         String ty = ConfigUtil.getConfig("TY");
         String tx = ConfigUtil.getConfig("TX");
 
-        System.out.println("----------提押开始----------");
-        xxty.infoAndActualTy(ty);
-        System.out.println("----------提押结束----------");
-        System.out.println("\t");
-        System.out.println("\t");
+//        System.out.println("----------提押开始----------");
+//        xxty.infoAndActualTy(ty);
+//        System.out.println("----------提押结束----------");
+//        System.out.println("\t");
+//        System.out.println("\t");
 
         System.out.println("--------律师会见开始---------");
         xxLshj.infoAndActualLshj(hj);
