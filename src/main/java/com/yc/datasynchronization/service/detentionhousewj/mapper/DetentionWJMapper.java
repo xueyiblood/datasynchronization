@@ -35,4 +35,14 @@ public interface DetentionWJMapper {
             "</if>",
             "</script>"})
     List<STjcsdj> getWJTjcsdj(@Param("ty") String ty);
+
+
+    @Select("select * from rybdxxb")
+    List<SRybdxxb> getRybdxxb();
+
+    @Select("select * from ryjbxxb")
+    List<SRyjbxxb> getRyjbxx();
+
+    @Select("select * from zpb")
+    List<SZpb> getZpb();
 }

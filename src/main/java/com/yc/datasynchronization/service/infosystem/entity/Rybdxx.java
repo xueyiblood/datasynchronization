@@ -116,5 +116,16 @@ public class Rybdxx {
 
     private Date sybjl;
 
+    private String isdel;
+
+
+
+    private String zybhcory;
+
+    private String csqxxz;
+
+    private String jsxm;
+
+    private String jsdh;
 
 }

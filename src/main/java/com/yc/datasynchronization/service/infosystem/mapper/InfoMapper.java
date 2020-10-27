@@ -1,6 +1,7 @@
 package com.yc.datasynchronization.service.infosystem.mapper;
 
 import com.yc.datasynchronization.service.infosystem.entity.*;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -56,4 +57,29 @@ public interface InfoMapper {
             "</if>",
             "</script>"})
     List<Txxxb> getInfoTxxxb(@Param("jsbh") String jsbh, @Param("tx") String tx);
+
+
+    @Insert("insert into RYBDXXB (RYBH,DBRQ,JLRQ,RSRQ,RSYY,SYPZ,ZLDW,SYDW,SYR,FLWSH,BZ,WFFZJL,CYLB,AJLB,JYAQ," +
+            "ZXF,RYGLLB,BADW,PZRQ,PZDW,PZR,Csrq,CSYY,CSQX,JDDW,DBR,DBRYZYRGX,DBRZZ,DBRGZDW," +
+            "SNBX,HSSJ,JYRQ,WZBF,FACCODE,CZSJC,ISDEL,ZYJSBH) " +
+            "values(#{RYBH},#{DBRQ},#{JLRQ},#{RSRQ},#{RSYY},#{SYPZ},#{ZLDW},#{SYDW},#{SYR}," +
+            "#{FLWSH},#{BZ},#{WFFZJL},#{CYLB},#{AJLB},#{JYAQ}," +
+            "#{ZXF},#{RYGLLB},#{BADW},#{PZRQ},#{PZDW},#{PZR},#{Csrq},#{CSYY},#{CSQX},#{JDDW},#{DBR},#{DBRYZYRGX},#{DBRZZ},#{DBRGZDW}," +
+            "#{SNBX},#{HSSJ},#{JYRQ},#{WZBF},#{FACCODE},#{CZSJC}),#{ISDEL}),#{ZYJSBH})")
+    void insertIntoRybdxxb(Rybdxx rybdxx);
+
+    @Insert("insert into RYJBXXB (RYBH,ZYJSBH,BH,XM,XB,CSRQ,ZZMM,ZJLX,ZJHM,HZH,HYZK,MZ,GJ," +
+            "JG,ZC,WHCD,ZY,GZDW,ZW,SF,TSSF,HJSZD,HJDXZ,XZZQH,XZZXZ,Dah,Zwbh,BZ," +
+            "JSH,GYQX,RYBJ,PYZT,CZR,SDRQ,FLWSH,HYRQ,SSJD,BADWLX,BADW,BAR," +
+            "Clsj,Cljg,Xq,Xqksrq,Xqjzrq,Fjcl,Fjclxq,Ssrq,Zxrq,Fjje,Hxxq,Spz,BARDH,WXDJ,Fh,CZSJC,JBXXLB," +
+            "Stxxlb,Zhxxlb,Jbxxzfs,Stxxzfs,Zhxxzfs,Rsqbxfs,YXLSHJ,RSQBX)" +
+            "values(#{rybh},#{zyjsbh},#{bh},#{xm},#{xb},#{csrq},#{zzmm},#{zjlx},#{zjhm},#{hzh},#{hyzk},#{mz},#{gj}," +
+            "#{jg},#{zc},#{whcd},#{zy},#{gzdw},#{zw},#{sf},#{tssf},#{hjszd},#{hjdxz},#{xzzqh},#{xzzxz},#{dah},#{zwbh},#{bz}," +
+            "#{jsh},#{gyqx},#{rybj},#{pyzt},#{czr},#{sdrq},#{flwsh},#{hyrq},#{ssjd},#{badwlx},#{badw},#{bar}," +
+            "#{clsj},#{cljg},#{xq},#{xqksrq},#{xqjzrq},#{fjcl},#{fjclxq},#{ssrq},#{zxrq},#{fjje},#{hxxq},#{spz},#{bardh},#{wxdj},#{fh}," +
+            "#{czsjc},#{jbxxlb},#{stxxlb},#{zhxxlb},#{jbxxzfs},#{stxxzfs},#{zhxxzfs},#{rsqbxfs},#{yxlshj},#{rsqbx})")
+    void insertIntoRyjbxxb(Ryjbxx ryjbxx);
+
+    @Insert("insert into zpb (rybh,pic,czsjc) values(#{rybh},#{pic},#{czsjc})")
+    void insertIntoZpb(Zpb zp);
 }

@@ -11,4 +11,6 @@ public class Zpb  {
     private String zyjsbh;
     private String czsjc;
     private String sybjl;
+
+    private String isdel;
 }
