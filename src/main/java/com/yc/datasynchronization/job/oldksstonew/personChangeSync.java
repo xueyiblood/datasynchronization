@@ -35,8 +35,21 @@ public class personChangeSync {
     public void personChaneeSync() throws IOException {
 
         /**
-         * 捞出老信息平台数据，丢入信息平台
+         * 人员基本信息，人员变动信息，照片
          */
+
+
+        List<SRyjbxxb> ryjbxxbs = detentionWJMapper.getRyjbxx();
+
+        if (!CollectionUtils.isEmpty(ryjbxxbs)){
+            for (SRyjbxxb ryjbxxb : ryjbxxbs) {
+                Ryjbxx ryjbxx = new Ryjbxx();
+                BeanUtils.copyProperties(ryjbxxb, ryjbxx);
+
+                ryjbxx.setZyjsbh("320583111");
+                infoMapper.insertIntoRyjbxxb(ryjbxx);
+            }
+        }
 
 
         List<SRybdxxb> rybdxxbs = detentionWJMapper.getRybdxxb();
@@ -53,17 +66,7 @@ public class personChangeSync {
         }
 
 
-        List<SRyjbxxb> ryjbxxbs = detentionWJMapper.getRyjbxx();
 
-        if (!CollectionUtils.isEmpty(ryjbxxbs)){
-            for (SRyjbxxb ryjbxxb : ryjbxxbs) {
-                Ryjbxx ryjbxx = new Ryjbxx();
-                BeanUtils.copyProperties(ryjbxxb, ryjbxx);
-
-                ryjbxx.setZyjsbh("320583111");
-                infoMapper.insertIntoRyjbxxb(ryjbxx);
-            }
-        }
 
         List<SZpb> pictures = detentionWJMapper.getZpb();
 
