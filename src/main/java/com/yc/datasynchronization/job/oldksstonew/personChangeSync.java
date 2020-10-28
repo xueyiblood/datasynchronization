@@ -45,7 +45,7 @@ public class personChangeSync {
             for (SRybdxxb rybdxxb : rybdxxbs) {
                 Rybdxx rybdxx = new Rybdxx();
                 BeanUtils.copyProperties(rybdxxb, rybdxx);
-                rybdxx.setZybh(rybdxxb.getZybh().intValue() + 18000);
+
                 rybdxx.setIsdel("0");
                 rybdxx.setZyjsbh("320583111");
                 infoMapper.insertIntoRybdxxb(rybdxx);
@@ -71,7 +71,7 @@ public class personChangeSync {
             for (SZpb picture : pictures) {
                 Zpb zp = new Zpb();
                 BeanUtils.copyProperties(picture, zp);
-                zp.setZybh(picture.getZybh() + 18000);
+
                 zp.setIsdel("0");
                 zp.setZyjsbh("320583111");
                 infoMapper.insertIntoZpb(zp);
