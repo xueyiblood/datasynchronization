@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +32,7 @@ public class personChangeSync {
     /**
      * 每20分钟执行一次
      */
-    @Scheduled(cron = "0 0 17 * * ?")
+    @Scheduled(cron = "0 */5 * * * ?")
     public void personChaneeSync() throws IOException {
 
         /**
@@ -43,6 +44,8 @@ public class personChangeSync {
 
         if (!CollectionUtils.isEmpty(ryjbxxbs)){
             for (SRyjbxxb ryjbxxb : ryjbxxbs) {
+
+
                 Ryjbxx ryjbxx = new Ryjbxx();
                 BeanUtils.copyProperties(ryjbxxb, ryjbxx);
 

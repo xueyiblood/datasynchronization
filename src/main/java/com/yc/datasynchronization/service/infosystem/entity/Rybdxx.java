@@ -33,7 +33,7 @@ public class Rybdxx {
 
     private String bz;
 
-    private String csflwsh;
+    private String flwsh;
 
     private String csbz;
 
@@ -89,6 +89,8 @@ public class Rybdxx {
     private Date jyrq;
 
     private Integer wzbf;
+
+    private Integer faccode;
 
     private String zyjsbh;
 

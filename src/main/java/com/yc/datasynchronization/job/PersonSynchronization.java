@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Component
+//@Component
 public class PersonSynchronization {
 
     /**
@@ -208,7 +208,7 @@ public class PersonSynchronization {
                 actualRybdxx.setZldw(infoRybdxx.get(0).getZldw());
                 actualRybdxx.setSydw(infoRybdxx.get(0).getSydw());
                 actualRybdxx.setSyr(infoRybdxx.get(0).getSyr());
-                actualRybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
+                actualRybdxx.setFlwsh(infoRybdxx.get(0).getFlwsh());
                 actualRybdxx.setBz(infoRybdxx.get(0).getBz());
                 actualRybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
                 actualRybdxx.setCylb(infoRybdxx.get(0).getCylb());
@@ -362,7 +362,7 @@ public class PersonSynchronization {
             dt1Rybdxx.setZldw(infoRybdxx.get(0).getZldw());
             dt1Rybdxx.setSydw(infoRybdxx.get(0).getSydw());
             dt1Rybdxx.setSyr(infoRybdxx.get(0).getSyr());
-            dt1Rybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
+            dt1Rybdxx.setFlwsh(infoRybdxx.get(0).getFlwsh());
             dt1Rybdxx.setBz(infoRybdxx.get(0).getBz());
             dt1Rybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
             dt1Rybdxx.setCylb(infoRybdxx.get(0).getCylb());
@@ -510,7 +510,7 @@ public class PersonSynchronization {
             dt2Rybdxx.setZldw(infoRybdxx.get(0).getZldw());
             dt2Rybdxx.setSydw(infoRybdxx.get(0).getSydw());
             dt2Rybdxx.setSyr(infoRybdxx.get(0).getSyr());
-            dt2Rybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
+            dt2Rybdxx.setFlwsh(infoRybdxx.get(0).getFlwsh());
             dt2Rybdxx.setBz(infoRybdxx.get(0).getBz());
             dt2Rybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
             dt2Rybdxx.setCylb(infoRybdxx.get(0).getCylb());
@@ -659,7 +659,7 @@ public class PersonSynchronization {
             dt3Rybdxx.setZldw(infoRybdxx.get(0).getZldw());
             dt3Rybdxx.setSydw(infoRybdxx.get(0).getSydw());
             dt3Rybdxx.setSyr(infoRybdxx.get(0).getSyr());
-            dt3Rybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
+            dt3Rybdxx.setFlwsh(infoRybdxx.get(0).getFlwsh());
             dt3Rybdxx.setBz(infoRybdxx.get(0).getBz());
             dt3Rybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
             dt3Rybdxx.setCylb(infoRybdxx.get(0).getCylb());
@@ -807,7 +807,7 @@ public class PersonSynchronization {
             dt4Rybdxx.setZldw(infoRybdxx.get(0).getZldw());
             dt4Rybdxx.setSydw(infoRybdxx.get(0).getSydw());
             dt4Rybdxx.setSyr(infoRybdxx.get(0).getSyr());
-            dt4Rybdxx.setFlwsh(infoRybdxx.get(0).getCsflwsh());
+            dt4Rybdxx.setFlwsh(infoRybdxx.get(0).getFlwsh());
             dt4Rybdxx.setBz(infoRybdxx.get(0).getBz());
             dt4Rybdxx.setWffzjl(infoRybdxx.get(0).getWffzjl());
             dt4Rybdxx.setCylb(infoRybdxx.get(0).getCylb());
