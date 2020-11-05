@@ -32,7 +32,7 @@ public class personChangeSync {
     /**
      * 每20分钟执行一次
      */
-    @Scheduled(cron = "0 */5 * * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
     public void personChaneeSync() throws IOException {
 
         /**
