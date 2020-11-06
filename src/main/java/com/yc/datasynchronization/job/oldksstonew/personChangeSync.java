@@ -23,7 +23,7 @@ import java.util.List;
 public class personChangeSync {
 
     @Autowired
-    private DetentionKSMapper detentionWJMapper;
+    private DetentionWJMapper detentionWJMapper;
 
     @Autowired
     private InfoMapper infoMapper;
@@ -32,7 +32,7 @@ public class personChangeSync {
     /**
      * 每20分钟执行一次
      */
-    @Scheduled(cron = "0 10 21 * * ?")
+    @Scheduled(cron = "0 40 11 * * ?")
 //    @Scheduled(cron = "*/10 * * * * ?")
     public void personChaneeSync() throws IOException {
 
@@ -51,6 +51,9 @@ public class personChangeSync {
                 BeanUtils.copyProperties(ryjbxxb, ryjbxx);
 
                 ryjbxx.setZyjsbh("320583111");
+                //                张家港
+                ryjbxx.setZyjsbh("320582111");
+
                 try {
                     infoMapper.insertIntoRyjbxxb(ryjbxx);
                 } catch (Exception ex) {
@@ -68,7 +71,10 @@ public class personChangeSync {
                 BeanUtils.copyProperties(rybdxxb, rybdxx);
 
                 rybdxx.setIsdel("0");
-                rybdxx.setZyjsbh("320583111");
+//                昆山
+//                rybdxx.setZyjsbh("320583111");
+//                张家港
+                rybdxx.setZyjsbh("320582111");
                 infoMapper.insertIntoRybdxxb(rybdxx);
             }
         }
@@ -83,7 +89,16 @@ public class personChangeSync {
 
                 zp.setIsdel("0");
                 zp.setZyjsbh("320583111");
-                infoMapper.insertIntoZpb(zp);
+                //                张家港
+                zp.setZyjsbh("320582111");
+
+
+                try {
+                    infoMapper.insertIntoZpb(zp);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
             }
         }
 
